@@ -1,0 +1,33 @@
+div#wrapper {
+  margin: 0 auto;
+  max-width: 1440px;
+}
+.bar-buttons-action {
+  text-align: right;
+}
+.form-group .error {
+  color: red;
+  background: #ededed;
+  padding: 5px 20px;
+}
+.box-right {
+  float: right;
+}
+.custom_width_number {
+  width: 25%;
+  float: left;
+}
+.custom_width_select {
+  width: 75%;
+  float: left;
+}
+.box-detail dd {
+  margin-bottom: 10px;
+}
+.box-detail dd:last-child {
+  margin-bottom: 0;
+}
+.box-buttons a,
+.box-buttons button {
+  margin-right: 5px;
+}
