@@ -34,4 +34,6 @@ Route::group(array('prefix' => 'admin'), function(){
 	Route::resource('empresa', 'EnterpriseController');
 	Route::resource('plan', 'PlanController');
 	Route::resource('representante', 'RepresentativeController');
+	Route::resource('bancos', 'BankController');
+	Route::resource('cuentas_bancarias', 'BankAccountController');
 });

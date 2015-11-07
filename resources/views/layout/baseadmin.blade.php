@@ -31,16 +31,6 @@
     @yield('custom_styles')
     </style>
 
-    <!-- Flot Charts JavaScript -->
-    {!! HTML::script('assets/admin_page/flot/excanvas.min.js') !!}
-    {!! HTML::script('assets/admin_page/flot/jquery.flot.js') !!}
-    {!! HTML::script('assets/admin_page/flot/jquery.flot.pie.js') !!}
-    {!! HTML::script('assets/admin_page/flot/jquery.flot.resize.js') !!}
-    {!! HTML::script('assets/admin_page/flot/jquery.flot.time.js') !!}
-    {!! HTML::script('assets/admin_page/flot/excanvas.min.js') !!}
-    {!! HTML::script('assets/admin_page/flot/excanvas.min.js') !!}
-    {!! HTML::script('assets/admin_page/flot.tooltip/js/jquery.flot.tooltip.min.js') !!}
-
   </head>
 
   <body>

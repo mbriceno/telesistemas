@@ -1,7 +1,7 @@
 @extends('layout.baseadmin')
 
 @section('title')
-Planes y Servicios
+Bancos
 @stop
 
 @section('content')
@@ -9,12 +9,12 @@ Planes y Servicios
 <div id="page-wrapper">
     <div class="row row-centered">
         <div class="col-xs-12 col-sm-12 col-lg-12">
-            <h1 class="page-header">Planes y Servicios</h1>
+            <h1 class="page-header">Bancos</h1>
         </div>
                 
         <div class="col-xs-12 col-sm-12 col-lg-12">
             <div class="bar-buttons-action">
-                <a class="btn btn-success" href="{{ URL::route('admin.plan.create') }}">Agregar Plan</a>
+                <a class="btn btn-success" href="{{ URL::route('admin.bancos.create') }}">Agregar Banco</a>
             </div>
             <!-- will be used to show any messages -->
             @if (Session::has('message'))
@@ -22,7 +22,7 @@ Planes y Servicios
             @endif
             <div class="panel panel-default" style="margin-top:15px">
                 <div class="panel-heading">
-                    Listado de Planes
+                    Listado de Bancos
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
@@ -31,40 +31,22 @@ Planes y Servicios
                             <thead>
                                 <tr>
                                     <th>Nombre</th>
-                                    <th>Duracion</th>
-                                    <th>Costo</th>
-                                    <th>Estatus</th>
                                     <th class="col-lg-3">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($planes as $plan)
+                                @foreach ($bancos as $banco)
                                     <tr class="odd gradeX">
-                                        <td><a href="{{ URL::route('admin.plan.show',$plan->id) }}">{{$plan->nombre}}</a></td>
-                                        <td>{{$plan->tiempo_membresia}} {{$plan->unidad_tiempo}}</td>
-                                        <td>
-                                            @if($plan->costo > 0)
-                                                {{$plan->costo}}
-                                            @else
-                                                Porcentaje de cobro: {{$plan->porcentaje}}%
-                                            @endif
-                                        </td>
-                                        <td>
-                                            @if($plan->status == 1)
-                                                Activo
-                                            @else
-                                                Inactivo
-                                            @endif
-                                        </td>
+                                        <td>{{$banco->nombre}}</td>
                                         <td class="center box-buttons">
-                                            {!! Form::open(array('url' => 'admin/plan/' . $plan->id, 'class' => 'pull-right')) !!}
+                                            {!! Form::open(array('url' => 'admin/bancos/' . $banco->id, 'class' => 'pull-right')) !!}
                                                 {!! Form::hidden('_method', 'DELETE') !!}
                                                 {!! Form::button('<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>', array('type'=>'submit', 'class' => 'btn btn-danger')) !!}
                                             {!! Form::close() !!}
-                                            <a href="{{ URL::route('admin.plan.edit',$plan->id) }}" title="Modificar" type="button" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
-                                            
+                                            <a href="{{ URL::route('admin.bancos.edit',$banco->id) }}" title="Modificar" type="button" class="btn btn-primary pull-right">
+                                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                            </a>
                                         </td>
-                                                
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -78,7 +60,7 @@ Planes y Servicios
         </div>
         <!-- /.col-lg-12 -->
         <div class="col-xs-12 col-sm-12 col-lg-12">
-            {!! $planes->render() !!}
+            {!! $bancos->render() !!}
         </div>
     </div>
     <!-- /.row -->

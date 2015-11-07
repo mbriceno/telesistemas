@@ -59,6 +59,9 @@ Empresas
                                             {!! Form::close() !!}
                                             <a href="{{ URL::route('admin.empresa.edit',$enterprise->id) }}" title="Modificar" type="button" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
                                             <a href="#" title="Agregar Pago" type="button" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span></a>
+                                            <a href="{{ URL::route('admin.cuentas_bancarias.edit', $enterprise->id) }}" title="@if($enterprise->bank_account) Modificar cuenta bancaria @else Agregar datos Bancarios @endif" type="button" class="btn btn-primary pull-right">
+                                                <span class="fa fa-university" aria-hidden="true"></span>
+                                            </a>
                                         </td>
                                                 
                                     </tr>

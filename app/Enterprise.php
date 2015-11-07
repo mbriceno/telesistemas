@@ -39,4 +39,9 @@ class Enterprise extends Model
     {
         return $this->belongsToMany('App\Representative', 'enterprises_representatives');
     }
+
+    public function bank_account()
+    {
+        return $this->hasOne('App\BankAccount');
+    }
 }

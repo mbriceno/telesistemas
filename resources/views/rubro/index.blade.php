@@ -52,7 +52,7 @@ Rubros
                                         <td class="center box-buttons">
                                             {!! Form::open(array('url' => 'admin/rubro/' . $rubro->id, 'class' => 'pull-right')) !!}
                                                 {!! Form::hidden('_method', 'DELETE') !!}
-                                                {!! Form::button('<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>', array('class' => 'btn btn-danger')) !!}
+                                                {!! Form::button('<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>', array('type'=>'submit', 'class' => 'btn btn-danger')) !!}
                                             {!! Form::close() !!}
                                             <a href="{{ URL::route('admin.rubro.edit',$rubro->id) }}" title="Modificar" type="button" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
                                             

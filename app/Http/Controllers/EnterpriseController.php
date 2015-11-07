@@ -84,8 +84,11 @@ class EnterpriseController extends Controller
     public function show($id)
     {
         $empresa = Enterprise::find($id);
+        $tipo = array('CO' => 'Cuenta Corriente', 
+                        'AH' => 'Cuenta de Ahorro', 
+                        'EL' => 'Cuenta Electrónica');
 
-        return view('enterprise.show', compact('empresa'));
+        return view('enterprise.show', compact('empresa', 'tipo'));
     }
 
     /**

@@ -10,7 +10,6 @@
                     </button>
                 </span>
                 </div>
-                <!-- /input-group -->
             </li-->
             <li>
                 <a href="{{ URL::route('admin') }}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
@@ -27,17 +26,17 @@
             <li>
                 <a href="{{ URL::route('admin.rubro.index') }}"><i class="fa fa-dashboard fa-fw"></i> Rubros</a>
             </li>
-            <!--li>
-                <a href="#"><i class="fa fa-dashboard fa-fw"></i> Rubros</a>
+            <li>
+                <a href="#"><i class="fa fa-dashboard fa-fw"></i> Configuración</a>
                 <ul class="nav" id="side-menu">
                     <li>
-                        <a href="{{ URL::route('admin.rubro.create') }}"><i class="fa fa-dashboard fa-fw"></i> Crear nuevo</a>
+                        <a href="{{ URL::route('admin.bancos.index') }}"><i class="fa fa-dashboard fa-fw"></i> Bancos</a>
                     </li>
                     <li>
-                        <a href=""><i class="fa fa-dashboard fa-fw"></i> Usuarios por Quiz</a>
+                        <a href="{{ URL::route('admin.cuentas_bancarias.index') }}"><i class="fa fa-dashboard fa-fw"></i> Cuetas Bancarias</a>
                     </li>
                 </ul>
-            </li-->
+            </li>
 
         </ul>
     </div>
