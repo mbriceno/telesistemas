@@ -16,7 +16,7 @@ class SaleOrderController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -26,7 +26,7 @@ class SaleOrderController extends Controller
      */
     public function create()
     {
-        //
+        return view('sale_order.create');
     }
 
     /**
