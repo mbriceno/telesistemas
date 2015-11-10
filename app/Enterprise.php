@@ -44,4 +44,5 @@ class Enterprise extends Model
     {
         return $this->hasOne('App\BankAccount');
     }
+
 }

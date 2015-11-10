@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Auth;
 use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
@@ -22,6 +24,9 @@ class AuthController extends Controller
     */
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
+
+    protected $redirectPath = '/admin';
+    protected $redirectAfterLogout = '/auth/login';
 
     /**
      * Create a new authentication controller instance.
@@ -61,5 +66,21 @@ class AuthController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+    public function authenticate(Request $request)
+    {
+        $this->validate($request, [
+            'email' => 'required|email', 'password' => 'required',
+        ]);
+
+        if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password'), 'status' => 1])) {
+            // Authentication passed...
+            $user = Auth::user();
+            if($user->is('telesistemas'))
+                return redirect()->intended('admin');
+            elseif ($user->is('empresas.vendedor'))
+                return redirect()->intended('sale-point');
+        }
     }
 }

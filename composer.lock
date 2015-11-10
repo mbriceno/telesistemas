@@ -4,9 +4,54 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "87391a9ed934cd8d492d83ee60662e8f",
-    "content-hash": "09a48dc7cddb0f6d91b8114087caaf70",
+    "hash": "f0f5340bc58e408faf18bda2e800d691",
+    "content-hash": "b2b9dd0eec7dd26f3e0a3eb46d7cc894",
     "packages": [
+        {
+            "name": "bican/roles",
+            "version": "2.1.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/romanbican/roles.git",
+                "reference": "582349795ef0af9ff1a64bb2c1b884bbd5ab7c98"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/romanbican/roles/zipball/582349795ef0af9ff1a64bb2c1b884bbd5ab7c98",
+                "reference": "582349795ef0af9ff1a64bb2c1b884bbd5ab7c98",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5.0",
+                "php": ">=5.5.9"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Bican\\Roles": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Roman Bičan",
+                    "email": "romanbican@seznam.cz"
+                }
+            ],
+            "description": "Powerful package for handling roles and permissions in Laravel 5.",
+            "keywords": [
+                "acl",
+                "auth",
+                "illuminate",
+                "laravel",
+                "permissions",
+                "roles"
+            ],
+            "time": "2015-07-30 10:00:12"
+        },
         {
             "name": "classpreloader/classpreloader",
             "version": "2.0.0",
@@ -152,16 +197,16 @@
         },
         {
             "name": "doctrine/inflector",
-            "version": "v1.0.1",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/inflector.git",
-                "reference": "0bcb2e79d8571787f18b7eb036ed3d004908e604"
+                "reference": "90b2128806bfde671b6952ab8bea493942c1fdae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/inflector/zipball/0bcb2e79d8571787f18b7eb036ed3d004908e604",
-                "reference": "0bcb2e79d8571787f18b7eb036ed3d004908e604",
+                "url": "https://api.github.com/repos/doctrine/inflector/zipball/90b2128806bfde671b6952ab8bea493942c1fdae",
+                "reference": "90b2128806bfde671b6952ab8bea493942c1fdae",
                 "shasum": ""
             },
             "require": {
@@ -173,7 +218,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0.x-dev"
+                    "dev-master": "1.1.x-dev"
                 }
             },
             "autoload": {
@@ -215,7 +260,7 @@
                 "singularize",
                 "string"
             ],
-            "time": "2014-12-20 21:24:13"
+            "time": "2015-11-06 14:35:42"
         },
         {
             "name": "illuminate/html",

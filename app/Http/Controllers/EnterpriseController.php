@@ -137,4 +137,13 @@ class EnterpriseController extends Controller
 
         return redirect()->route('admin.empresa.index')->with('message', '<div class="alert alert-success" style="margin-top:15px">Empresa eliminada con Éxito</div>');
     }
+
+    /**
+     *
+    */
+    public function staff($id){
+        $staff = Enterprise::find($id)->staff()->paginate(10);
+
+        return view('enterprise.staff', compact('staff', 'id'));
+    }
 }

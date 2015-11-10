@@ -14,9 +14,7 @@
             <li>
                 <a href="{{ URL::route('admin') }}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
             </li>
-            <li>
-                <a href=""><i class="fa fa-dashboard fa-fw"></i> Usuarios</a>
-            </li>
+            @role('superadmin|telesistemas')
             <li>
                 <a href="{{ URL::route('admin.empresa.index') }}"><i class="fa fa-dashboard fa-fw"></i> Empresas</a>
             </li>
@@ -37,7 +35,12 @@
                     </li>
                 </ul>
             </li>
-
+            @endrole
+            @role('empresas.vendedor|empresas.administrador')
+            <li>
+                <a href="{{ URL::route('sale-point.orden-venta.create') }}"><i class="fa fa-dashboard fa-fw"></i> Nueva Venta</a>
+            </li>
+            @endrole
         </ul>
     </div>
     <!-- /.sidebar-collapse -->

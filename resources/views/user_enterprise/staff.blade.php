@@ -1,7 +1,7 @@
 @extends('layout.baseadmin')
 
 @section('title')
-Empresas
+Usuarios de empresas
 @stop
 
 @section('content')
@@ -9,12 +9,12 @@ Empresas
 <div id="page-wrapper">
     <div class="row row-centered">
         <div class="col-xs-12 col-sm-12 col-lg-12">
-            <h1 class="page-header">Empresas</h1>
+            <h1 class="page-header">Usuarios de empresas</h1>
         </div>
                 
         <div class="col-xs-12 col-sm-12 col-lg-12">
             <div class="bar-buttons-action">
-                <a class="btn btn-success" href="{{ URL::route('admin.empresa.create') }}">Agregar Empresa</a>
+                <a class="btn btn-success" href="{{ URL::route('admin.empresa.create') }}">Agregar nuevo usuario</a>
             </div>
             <!-- will be used to show any messages -->
             @if (Session::has('message'))
@@ -22,7 +22,7 @@ Empresas
             @endif
             <div class="panel panel-default" style="margin-top:15px">
                 <div class="panel-heading">
-                    Listado de Empresas
+                    Listado de usuarios
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
@@ -30,43 +30,37 @@ Empresas
                         <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                             <thead>
                                 <tr>
-                                    <th>Razón Social</th>
-                                    <th>Nombre comercial</th>
-                                    <th>R.I.F.</th>
+                                    <th>Nombre</th>
+                                    <th>C.I</th>
+                                    <th>Teléfono</th>
+                                    <th>Móvil</th>
                                     <th>E-mail</th>
-                                    <th>Estatus</th>
+                                    <th>Status</th>
                                     <th class="col-lg-3">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($enterprises as $enterprise)
+                                @foreach ($staff as $user)
                                     <tr class="odd gradeX">
-                                        <td><a href="{{ URL::route('admin.empresa.show',$enterprise->id) }}">{{$enterprise->razon_social}}</a></td>
-                                        <td>{{$enterprise->nombre_comercial}}</td>
-                                        <td>{{$enterprise->rif}}</td>
-                                        <td>{{$enterprise->email}}</td>
+                                        <td><a href="{{ URL::route('admin.empresa.show',$user->id) }}">{{$user->nombre}} {{$user->apellido}}</a></td>
+                                        <td>{{$user->ci}}</td>
+                                        <td>{{$user->telefono}}</td>
+                                        <td>{{$user->cargo}}</td>
+                                        <td>{{$user->email}}</td>
                                         <td>
-                                            @if($enterprise->status == 1)
+                                            @if($user->user->status == 1)
                                                 Activo
                                             @else
                                                 Inactivo
                                             @endif
                                         </td>
                                         <td class="center box-buttons">
-                                            {!! Form::open(array('url' => 'admin/empresa/' . $enterprise->id, 'class' => 'pull-right')) !!}
+                                            {!! Form::open(array('url' => 'admin/empresa/' . $user->id, 'class' => 'pull-right')) !!}
                                                 {!! Form::hidden('_method', 'DELETE') !!}
                                                 {!! Form::button('<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>', array('type' => 'submit', 'class' => 'btn btn-danger')) !!}
                                             {!! Form::close() !!}
-                                            <a href="{{ URL::route('admin.empresa.edit',$enterprise->id) }}" title="Modificar" type="button" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
-                                            <a href="#" title="Agregar Pago" type="button" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span></a>
-                                            <a href="{{ URL::route('admin.cuentas_bancarias.edit', $enterprise->id) }}" title="@if($enterprise->bank_account) Modificar cuenta bancaria @else Agregar datos Bancarios @endif" type="button" class="btn btn-primary pull-right">
-                                                <span class="fa fa-university" aria-hidden="true"></span>
-                                            </a>
-                                            <a href="{{ URL::route('admin.empresa.staff', $enterprise->id) }}" title="Usuarios de empresas" type="button" class="btn btn-primary pull-right">
-                                                <span class="fa fa-users" aria-hidden="true"></span>
-                                            </a>
+                                            <a href="{{ URL::route('admin.empresa.edit',$user->id) }}" title="Modificar" type="button" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
                                         </td>
-                                                
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -80,7 +74,7 @@ Empresas
         </div>
         <!-- /.col-lg-12 -->
         <div class="col-xs-12 col-sm-12 col-lg-12">
-            {!! $enterprises->render() !!}
+            {!! $staff->render() !!}
         </div>
     </div>
     <!-- /.row -->
