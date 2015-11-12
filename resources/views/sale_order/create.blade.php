@@ -59,7 +59,7 @@ Nueva venta
 					</div>
 
 					<div class="form-group col-xs-12 col-sm-12 col-lg-7 box-list-products">
-						<table class="table table-striped table-bordered table-hover" id="tableListProducts">
+						<table class="table table-striped" id="tableListProducts">
 							<thead>
 								<tr>
 									<th>Producto</th>
@@ -126,14 +126,17 @@ Nueva venta
 							</div>
 						</div>
 					</div>
+					<div class="form-group col-xs-12 col-sm-12 col-lg-4 sale-send-box">
+						<div class="form-group col-xs-12 col-sm-6 col-lg-7 pull-right box-buy">
+							{!!Form::submit("Comprar", array("class" => "btn btn-lg btn-success btn-block", "id" =>"btnSubmit"))!!}
+						</div>
+						<div class="form-group col-xs-12 col-sm-6 col-lg-7 pull-right">
+							<input type="reset" class="btn btn-lg btn-danger btn-block btn-reset-buy" value="Cancelar">
+						</div>
+					</div>
 				</div>
 				<div class="row">
-					<div class="form-group col-xs-12 col-sm-6 col-lg-6">
-						{!!Form::submit("Comprar", array("class" => "btn btn-lg btn-success btn-block", "id" =>"btnSubmit"))!!}
-					</div>
-					<div class="form-group col-xs-12 col-sm-6 col-lg-6">
-						<a href="{!!URL::route('admin.plan.index')!!}" class="btn btn-lg btn-danger btn-block">Volver</a>
-					</div>
+
 				</div>
 				{!!Form::close()!!}
 			</div>
@@ -164,7 +167,7 @@ $('.btn-add-product').click(function(e){
 			$('.box-product-description input[name="producto"]').val() + ' <input type="hidden" value="'+$('.box-product-description input[name="producto"]').val()+'" name="products['+count+'][nombre]">'+
 		'	</td>' +
 		'	<td class="box-cantidad">' +
-		' 		<input type="number" min="1" step="any" class="col-lg-3" name="products['+count+'][cantidad]" value="'+$('.box-product-description input[name="cantidad"]').val()+'" placeholder="Cantidad">'+
+		' 		<input type="number" min="1" step="any" class="col-lg-6" name="products['+count+'][cantidad]" value="'+$('.box-product-description input[name="cantidad"]').val()+'" placeholder="Cantidad">'+
 		'	</td>' +
 		'	<td class="box-monto">' +
 		' 		<span>' + $('.box-product-description input[name="monto"]').val() + '</span> Bs. <input type="hidden" value="'+$('.box-product-description input[name="monto"]').val()+'" name="products['+count+'][monto]">' +
@@ -188,6 +191,7 @@ $('.btn-add-product').click(function(e){
 $('#tableListProducts').on('click','button.del-btn',function(e){
 	e.preventDefault();
 	$(this).parent().parent().remove();
+	$("td.box-monto-total input").trigger("changeTable");
 });
 
 $('#tableListProducts').on("changeTable", 'td.box-monto-total input', function(){
@@ -205,7 +209,7 @@ $('#tableListProducts').on("changeTable", 'td.box-monto-total input', function()
 	$('.box-total-total input[name="total"]').val(total);
 });
 
-$('#tableListProducts').on('keyup', 'td.box-cantidad input', function(){
+$('#tableListProducts').on('keyup change', 'td.box-cantidad input', function(){
 	var cantidad = parseFloat($(this).val());
 	console.log(cantidad);
 	if(!isNaN(cantidad) || cantidad > 0){
@@ -219,6 +223,10 @@ $('#tableListProducts').on('keyup', 'td.box-cantidad input', function(){
 	}else{
 		alert("Cantidad no puede ser nula o menor a cero");
 	}
+});
+
+$('.btn-reset-buy').click(function(){
+	$('#tableListProducts tbody').html('');
 });
 
 /*$("#formid").validate({

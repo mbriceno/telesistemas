@@ -38,7 +38,7 @@ div#wrapper {
   width: 140px;
 }
 #page-wrapper.content-ventas {
-  margin-left: 140px;
+  margin-left: 0;
   padding: 0;
 }
 #page-wrapper.content-ventas .form-control {
