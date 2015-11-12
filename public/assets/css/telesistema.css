@@ -34,3 +34,48 @@ div#wrapper {
 .box-info-show {
   margin: 0;
 }
+.sidebar-ventas {
+  width: 140px;
+}
+#page-wrapper.content-ventas {
+  margin-left: 140px;
+  padding: 0;
+}
+#page-wrapper.content-ventas .form-control {
+  border-radius: 0;
+}
+#page-wrapper.content-ventas .box-list-products {
+  height: 400px;
+  max-height: 400px;
+  background-color: #FCFCFC;
+  margin-left: 15px;
+  padding: 0;
+}
+#page-wrapper.content-ventas .box-product-description {
+  padding: 0;
+  width: 40%;
+}
+#page-wrapper.content-ventas .btn-add-product {
+  width: 50%;
+  float: right;
+  border-radius: 0;
+  height: 70px;
+}
+#page-wrapper.content-ventas .box-cantidad input {
+  text-align: right;
+  padding-right: 0;
+}
+#page-wrapper.content-ventas .total-box {
+  margin-left: 15px;
+  padding: 0;
+}
+#page-wrapper.content-ventas .box-sub-total,
+#page-wrapper.content-ventas .box-iva-total,
+#page-wrapper.content-ventas .box-total-total {
+  padding: 0;
+}
+#page-wrapper.content-ventas .box-sub-total div,
+#page-wrapper.content-ventas .box-iva-total div,
+#page-wrapper.content-ventas .box-total-total div {
+  padding-right: 0;
+}
