@@ -58,7 +58,7 @@ Empresas
                                                 {!! Form::button('<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>', array('type' => 'submit', 'class' => 'btn btn-danger')) !!}
                                             {!! Form::close() !!}
                                             <a href="{{ URL::route('admin.empresa.edit',$enterprise->id) }}" title="Modificar" type="button" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
-                                            <a href="#" title="Agregar Pago" type="button" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span></a>
+                                            <a href="{{ URL::route('admin.pagos.listado',$enterprise->id) }}" title="Agregar Pago" type="button" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span></a>
                                             <a href="{{ URL::route('admin.cuentas_bancarias.edit', $enterprise->id) }}" title="@if($enterprise->bank_account) Modificar cuenta bancaria @else Agregar datos Bancarios @endif" type="button" class="btn btn-primary pull-right">
                                                 <span class="fa fa-university" aria-hidden="true"></span>
                                             </a>

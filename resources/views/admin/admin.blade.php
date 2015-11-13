@@ -4,6 +4,12 @@
 Administrador
 @stop
 
+@section('additional-class')
+@role('empresas.vendedor|empresas.administrador')
+wrapper-ventas
+@endrole
+@stop
+
 @section('content')
 
 <div id="page-wrapper">

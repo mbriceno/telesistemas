@@ -14,6 +14,7 @@ class SaleOrder extends Model
         'ci_rif' => 'required',
         'telefono' => 'required|alpha_dash',
         'forma_pago' => 'required',
+        'iva_percentage' => 'required|numeric',
 		'monto' => 'required|numeric',
 		'iva' => 'required|numeric',
 		'total' => 'required|numeric'
@@ -22,7 +23,7 @@ class SaleOrder extends Model
 	protected $fillable = array('enterprise_id', 'razon_social', 'ci_rif', 
                                 'direccion', 'telefono', 'fecha_emision',
                                 'nro_orden', 'forma_pago', 
-                                'monto', 'iva', 'total');
+                                'monto', 'iva', 'iva_percentage', 'total');
 
     public function enterprise()
     {

@@ -44,7 +44,7 @@ class SaleOrderController extends Controller
         $serial = str_pad(SaleOrder::count(),6,'0',STR_PAD_LEFT);
 		$data = array_merge($request->all(), 
 									array(
-										'fecha_emision' => date('d-m-Y'),
+										'fecha_emision' => date('Y-m-d'),
 										'nro_orden' => $serial,
 										'enterprise_id' => Auth::user()->enterprise[0]->id
 									));

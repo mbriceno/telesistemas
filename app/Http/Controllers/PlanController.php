@@ -11,6 +11,14 @@ use App\Rubro;
 
 class PlanController extends Controller
 {
+    private $tiempo = array(
+        'hours' => 'Hora(s)', 
+        'days' => 'Día(s)', 
+        'weeks' => 'Semana(s)', 
+        'months' => 'Mes(es)', 
+        'years' => 'Año(s)'
+    );
+
     /**
      * Display a listing of the resource.
      *
@@ -58,11 +66,8 @@ class PlanController extends Controller
     public function show($id)
     {
         $plan = Plan::find($id);
-        $tiempo = array('hours' => 'Hora(s)', 
-                        'days' => 'Día(s)', 
-                        'weeks' => 'Semana(s)', 
-                        'months' => 'Mes(es)', 
-                        'years' => 'Año(s)');
+        $tiempo = $this->tiempo;
+        
         return view('plan.show', compact('plan', 'tiempo'));
     }
 

@@ -41,6 +41,10 @@ Route::group(array('prefix' => 'admin', 'middleware' => ['auth','level:90']), fu
 
 	Route::get('usuarios_empresa/create_user/{id}', array('as'=>'admin.usuarios_empresa.create_user','uses' => 'UserEnterpriseController@create_user'));
 	Route::resource('usuarios_empresa', 'UserEnterpriseController');
+
+	Route::get('pagos/listato/{id}', array('as'=>'admin.pagos.listado','uses' => 'PaymentOrderController@payment_list'));
+	Route::get('pagos/nuevo-pago/{id}', array('as'=>'admin.pagos.create_payment','uses' => 'PaymentOrderController@create_payment'));
+	Route::resource('pagos', 'PaymentOrderController');
 });
 
 Route::group(array('prefix' => 'sale-point', 'middleware' => ['auth','role:empresas.vendedor']), function(){

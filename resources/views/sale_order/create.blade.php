@@ -4,6 +4,10 @@
 Nueva venta
 @stop
 
+@section('additional-class')
+wrapper-ventas
+@stop
+
 @section('content')
 
 <!-- Page Content -->
@@ -21,7 +25,7 @@ Nueva venta
 					<div class="form-group col-xs-12 col-sm-12 col-lg-8">
 						{!! Form::label("*Nombre del cliente o Razón Social:") !!}
 						{!!Form::text("razon_social", Input::old('razon_social'), array("class" => "form-control"))!!}
-						@if($errors->has('nombre'))
+						@if($errors->has('razon_social'))
 						<div class="error">{{ $errors->first('razon_social') }}</div>
 						@endif
 					</div>
@@ -57,6 +61,7 @@ Nueva venta
 						<div class="error">{{ $errors->first('forma_pago') }}</div>
 						@endif
 					</div>
+					<div class="row" style="padding: 0 15px;clear:both">
 					<div class="form-group col-xs-12 col-sm-12 col-lg-7 box-list-products">
 						<table class="table table-striped" id="tableListProducts">
 							<thead>
@@ -88,6 +93,7 @@ Nueva venta
 							<button class="btn btn-lg btn-success btn-add-product">Agregar</button>
 						</div>
 					</div>
+					</div>
 
 					<div class="form-group col-xs-12 col-sm-12 col-lg-7 total-box">
 						<div class="col-xs-12 col-sm-12 col-lg-6 pull-right box-sub-total">
@@ -102,9 +108,9 @@ Nueva venta
 						<div class="col-xs-12 col-sm-12 col-lg-12 pull-right box-iva-total">
 							<div class="form-group col-xs-12 col-sm-12 col-lg-6 box-iva-percent">
 								{!!Form::label("I.V.A:")!!}
-								{!!Form::input("number", "iva_number", '12.00', array("class" => "form-control","value"=>0, "min"=>0, "step"=>"any"))!!}
-								@if($errors->has('iva_number'))
-								<div class="error">{{ $errors->first('iva_number') }}</div>
+								{!!Form::input("number", "iva_percentage", '12.00', array("class" => "form-control","value"=>0, "min"=>0, "step"=>"any"))!!}
+								@if($errors->has('iva_percentage'))
+								<div class="error">{{ $errors->first('iva_percentage') }}</div>
 								@endif
 							</div>
 							<div class="form-group col-xs-12 col-sm-12 col-lg-6 box-iva-total-amount">
@@ -158,33 +164,36 @@ $('input[name="telefono"]').mask("9999-9999999",{placeholder:" "});
 var count = 0;
 $('.btn-add-product').click(function(e){
 	e.preventDefault();
-	count++;
-	var total = $('.box-product-description input[name="cantidad"]').val() * $('.box-product-description input[name="monto"]').val();
-	$('#tableListProducts tbody').append(
-		'<tr id="prd_">' +
-		'	<td>' +
-			$('.box-product-description input[name="producto"]').val() + ' <input type="hidden" value="'+$('.box-product-description input[name="producto"]').val()+'" name="products['+count+'][nombre]">'+
-		'	</td>' +
-		'	<td class="box-cantidad">' +
-		' 		<input type="number" min="1" step="any" class="col-lg-6" name="products['+count+'][cantidad]" value="'+$('.box-product-description input[name="cantidad"]').val()+'" placeholder="Cantidad">'+
-		'	</td>' +
-		'	<td class="box-monto">' +
-		' 		<span>' + $('.box-product-description input[name="monto"]').val() + '</span> Bs. <input type="hidden" value="'+$('.box-product-description input[name="monto"]').val()+'" name="products['+count+'][monto]">' +
-		'	</td>' +
-		'	<td class="box-monto-total">' +
-		' 		<span>' + total + '</span> Bs. <input type="hidden" value="'+total+'" name="products['+count+'][total]">' +
-		'	</td>' +
-		'	<td class="">' +
-		'		<button type="button" class="btn btn-danger del-btn"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>'+
-		'	</td>' +
-		'</tr>'
-	);
 
-	$('.box-product-description input[name="producto"]').val('');
-	$('.box-product-description input[name="cantidad"]').val(1);
-	$('.box-product-description input[name="monto"]').val('');
+	if($('.box-product-description input[name="producto"]').valid() && $('.box-product-description input[name="cantidad"]').valid() && $('.box-product-description input[name="monto"]').valid()){
+		count++;
+		var total = $('.box-product-description input[name="cantidad"]').val() * $('.box-product-description input[name="monto"]').val();
+		$('#tableListProducts tbody').append(
+			'<tr id="prd_">' +
+			'	<td>' +
+				$('.box-product-description input[name="producto"]').val() + ' <input type="hidden" value="'+$('.box-product-description input[name="producto"]').val()+'" name="products['+count+'][nombre]">'+
+			'	</td>' +
+			'	<td class="box-cantidad">' +
+			' 		<input type="number" min="1" step="any" class="col-lg-6" name="products['+count+'][cantidad]" value="'+$('.box-product-description input[name="cantidad"]').val()+'" placeholder="Cantidad">'+
+			'	</td>' +
+			'	<td class="box-monto">' +
+			' 		<span>' + $('.box-product-description input[name="monto"]').val() + '</span> Bs. <input type="hidden" value="'+$('.box-product-description input[name="monto"]').val()+'" name="products['+count+'][monto]">' +
+			'	</td>' +
+			'	<td class="box-monto-total">' +
+			' 		<span>' + total + '</span> Bs. <input type="hidden" value="'+total+'" name="products['+count+'][total]">' +
+			'	</td>' +
+			'	<td class="">' +
+			'		<button type="button" class="btn btn-danger del-btn"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>'+
+			'	</td>' +
+			'</tr>'
+		);
 
-	$("td.box-monto-total input").trigger("changeTable");
+		$('.box-product-description input[name="producto"]').val('');
+		$('.box-product-description input[name="cantidad"]').val(1);
+		$('.box-product-description input[name="monto"]').val('');
+
+		$("td.box-monto-total input").trigger("changeTable");
+	}
 });
 
 $('#tableListProducts').on('click','button.del-btn',function(e){
@@ -228,7 +237,8 @@ $('.btn-reset-buy').click(function(){
 	$('#tableListProducts tbody').html('');
 });
 
-/*$("#formid").validate({
+$("#formid").validate({
+	onsubmit: false,
     rules: {
         producto: { required: true},
         cantidad: { required: true},
@@ -242,5 +252,5 @@ $('.btn-reset-buy').click(function(){
         	number:'El campo debe ser numérico'
         }
     }
-});*/
+});
 @stop

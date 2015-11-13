@@ -34,7 +34,7 @@
   </head>
 
   <body>
-      <div id="wrapper">
+      <div id="wrapper" class="@yield('additional-class')">
 
         @include('admin.header')
 
