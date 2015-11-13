@@ -1,0 +1,62 @@
+#page-wrapper.content-ventas .box-list-products{
+	height: 300px;
+	max-height: 300px;
+	background-color: #ECECEC;
+}
+
+.box-list-products table{
+	width: 100%;
+}
+
+.box-list-products thead, 
+.box-list-products tbody, 
+.box-list-products tr, 
+.box-list-products td, 
+.box-list-products th { display: block; }
+
+.box-list-products tr:after {
+    content: ' ';
+    display: block;
+    visibility: hidden;
+    clear: both;
+}
+
+.box-list-products thead th {
+    height: 30px;
+
+    /*text-align: left;*/
+}
+
+.box-list-products tbody {
+    height: 270px;
+    overflow-y: auto;
+}
+
+.box-list-products thead {
+    /* fallback */
+}
+
+
+.box-list-products tbody td, .box-list-products thead th {
+    width: 22%;
+    float: left;
+}
+
+.box-list-products tbody td:last-child, .box-list-products thead th:last-child{
+    width: 12%;
+}
+
+.sale-send-box{
+	width:40%;
+	padding-right:0;
+}
+.sale-send-box .btn{
+	width: 60%;
+	float: right;
+	border-radius: 0px;
+	height: 70px;
+}
+
+.sale-send-box .box-buy{
+	margin-top: 52px;
+}

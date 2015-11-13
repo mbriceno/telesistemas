@@ -23,7 +23,7 @@ class CreateOrderProductsTable extends Migration
             $table->string('nombre');
             $table->float('cantidad');
             $table->float('monto');
-            $table->boolean('total');
+            $table->float('total');
             $table->timestamps();
         });
     }

@@ -13,6 +13,7 @@ Nueva venta
 			<div class="col-xs-12 col-sm-12 col-lg-12">
 				<h1 class="page-header">Registrar Venta</h1>
 			</div>
+			<!--{!! HTML::ul($errors->all()) !!}-->
 			<!-- /.col-lg-12 -->
 			<div class="col-xs-12 col-sm-12 col-lg-12">
 				{!! Form::open(array("method" => "POST","route" => "sale-point.orden-venta.store","role" => "form","id"=>"formid")) !!}
@@ -56,17 +57,8 @@ Nueva venta
 						<div class="error">{{ $errors->first('forma_pago') }}</div>
 						@endif
 					</div>
-
-                    <div class="form-group col-xs-6 col-sm-3 col-lg-4">
-						{!!Form::label("*Fecha:")!!}
-						{!!Form::input('date', 'fecha_emision', Input::old('fecha_emision'), array("class" => "form-control",'id'=>'fecha_inicio'))!!}
-						@if($errors->has('fecha_emision'))
-						<div class="error">{{ $errors->first('fecha_emision') }}</div>
-						@endif
-					</div>
-
 					<div class="form-group col-xs-12 col-sm-12 col-lg-7 box-list-products">
-						<table class="table table-striped table-bordered table-hover" id="tableListProducts">
+						<table class="table table-striped" id="tableListProducts">
 							<thead>
 								<tr>
 									<th>Producto</th>
@@ -101,18 +93,18 @@ Nueva venta
 						<div class="col-xs-12 col-sm-12 col-lg-6 pull-right box-sub-total">
 							<div class="form-group col-xs-12 col-sm-12 col-lg-12">
 								{!!Form::label("Sub-total:")!!}
-								{!!Form::input("number", "subtotal", Input::old('subtotal'), array("class" => "form-control","value"=>0, "min"=>0, "step"=>"any", "readonly"=>"readonly"))!!}
-								@if($errors->has('subtotal'))
-								<div class="error">{{ $errors->first('subtotal') }}</div>
+								{!!Form::input("number", "monto", Input::old('monto'), array("class" => "form-control","value"=>0, "min"=>0, "step"=>"any", "readonly"=>"readonly"))!!}
+								@if($errors->has('monto'))
+								<div class="error">{{ $errors->first('monto') }}</div>
 								@endif
 							</div>
 						</div>
 						<div class="col-xs-12 col-sm-12 col-lg-12 pull-right box-iva-total">
 							<div class="form-group col-xs-12 col-sm-12 col-lg-6 box-iva-percent">
 								{!!Form::label("I.V.A:")!!}
-								{!!Form::input("number", "iva", '12.00', array("class" => "form-control","value"=>0, "min"=>0, "step"=>"any"))!!}
-								@if($errors->has('iva'))
-								<div class="error">{{ $errors->first('iva') }}</div>
+								{!!Form::input("number", "iva_number", '12.00', array("class" => "form-control","value"=>0, "min"=>0, "step"=>"any"))!!}
+								@if($errors->has('iva_number'))
+								<div class="error">{{ $errors->first('iva_number') }}</div>
 								@endif
 							</div>
 							<div class="form-group col-xs-12 col-sm-12 col-lg-6 box-iva-total-amount">
@@ -133,14 +125,17 @@ Nueva venta
 							</div>
 						</div>
 					</div>
+					<div class="form-group col-xs-12 col-sm-12 col-lg-4 sale-send-box">
+						<div class="form-group col-xs-12 col-sm-6 col-lg-7 pull-right box-buy">
+							{!!Form::submit("Comprar", array("class" => "btn btn-lg btn-success btn-block", "id" =>"btnSubmit"))!!}
+						</div>
+						<div class="form-group col-xs-12 col-sm-6 col-lg-7 pull-right">
+							<input type="reset" class="btn btn-lg btn-danger btn-block btn-reset-buy" value="Cancelar">
+						</div>
+					</div>
 				</div>
 				<div class="row">
-					<div class="form-group col-xs-12 col-sm-6 col-lg-6">
-						{!!Form::submit("Comprar", array("class" => "btn btn-lg btn-success btn-block", "id" =>"btnSubmit"))!!}
-					</div>
-					<div class="form-group col-xs-12 col-sm-6 col-lg-6">
-						<a href="{!!URL::route('admin.plan.index')!!}" class="btn btn-lg btn-danger btn-block">Volver</a>
-					</div>
+
 				</div>
 				{!!Form::close()!!}
 			</div>
@@ -154,6 +149,7 @@ Nueva venta
 <script type="text/javascript">
 $.mask.definitions['~']='[VvJjEePp]';
 $('input[name="ci_rif"]').mask("~-9999999?999",{placeholder:" "});
+$('input[name="telefono"]').mask("9999-9999999",{placeholder:" "});
 </script>
 
 @stop
@@ -170,7 +166,7 @@ $('.btn-add-product').click(function(e){
 			$('.box-product-description input[name="producto"]').val() + ' <input type="hidden" value="'+$('.box-product-description input[name="producto"]').val()+'" name="products['+count+'][nombre]">'+
 		'	</td>' +
 		'	<td class="box-cantidad">' +
-		' 		<input type="number" min="1" step="any" class="col-lg-3" name="products['+count+'][cantidad]" value="'+$('.box-product-description input[name="cantidad"]').val()+'" placeholder="Cantidad">'+
+		' 		<input type="number" min="1" step="any" class="col-lg-6" name="products['+count+'][cantidad]" value="'+$('.box-product-description input[name="cantidad"]').val()+'" placeholder="Cantidad">'+
 		'	</td>' +
 		'	<td class="box-monto">' +
 		' 		<span>' + $('.box-product-description input[name="monto"]').val() + '</span> Bs. <input type="hidden" value="'+$('.box-product-description input[name="monto"]').val()+'" name="products['+count+'][monto]">' +
@@ -194,6 +190,7 @@ $('.btn-add-product').click(function(e){
 $('#tableListProducts').on('click','button.del-btn',function(e){
 	e.preventDefault();
 	$(this).parent().parent().remove();
+	$("td.box-monto-total input").trigger("changeTable");
 });
 
 $('#tableListProducts').on("changeTable", 'td.box-monto-total input', function(){
@@ -202,7 +199,7 @@ $('#tableListProducts').on("changeTable", 'td.box-monto-total input', function()
 		amount = amount + parseFloat($(this).val());
 	});
 
-	$('.box-sub-total input[name="subtotal"]').val(amount);
+	$('.box-sub-total input[name="monto"]').val(amount);
 
 	var iva = parseFloat($('.box-iva-total .box-iva-percent input').val());
 	var totaliva = amount * (iva/100);
@@ -211,7 +208,7 @@ $('#tableListProducts').on("changeTable", 'td.box-monto-total input', function()
 	$('.box-total-total input[name="total"]').val(total);
 });
 
-$('#tableListProducts').on('keyup', 'td.box-cantidad input', function(){
+$('#tableListProducts').on('keyup change', 'td.box-cantidad input', function(){
 	var cantidad = parseFloat($(this).val());
 	console.log(cantidad);
 	if(!isNaN(cantidad) || cantidad > 0){
@@ -227,7 +224,11 @@ $('#tableListProducts').on('keyup', 'td.box-cantidad input', function(){
 	}
 });
 
-$("#formid").validate({
+$('.btn-reset-buy').click(function(){
+	$('#tableListProducts tbody').html('');
+});
+
+/*$("#formid").validate({
     rules: {
         producto: { required: true},
         cantidad: { required: true},
@@ -241,5 +242,5 @@ $("#formid").validate({
         	number:'El campo debe ser numérico'
         }
     }
-});
+});*/
 @stop
