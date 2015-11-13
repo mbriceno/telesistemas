@@ -44,6 +44,10 @@
 
     </div>
     <!-- /#wrapper -->
-
+    <script>
+        $(function(){
+            @yield('function');
+        });
+    </script>
   </body> <!-- /#body -->
 </html>
