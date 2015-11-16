@@ -16,13 +16,13 @@ class PaymentOrder extends Model
         'descripcion' => 'required|max:200|min:3',
         'factura' => 'required|max:200|min:2',
         'monto' => 'required|numeric',
-        'payment_status' => 'required'        
+        'payment_status' => 'required'
     );
 
     protected $fillable = array('enterprise_id', 'tipo_pago', 
                                 'fecha_pago', 'periodo', 'descripcion',
                                 'factura', 'monto', 
-                                'payment_status');
+                                'payment_status','ultimo_corte');
     public function enterprise()
     {
         return $this->belongsTo('App\Enterprise');

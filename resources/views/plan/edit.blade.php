@@ -24,14 +24,6 @@ Planes y Servicios
                         @if($errors->has('nombre'))
                         <div class="error">{{ $errors->first('nombre') }}</div>
                         @endif
-                    </div> 
-                                        
-                    <div class="form-group col-xs-12 col-sm-12 col-lg-6">
-                        {!!Form::label("*Descripción:")!!}
-                        {!!Form::textarea("descripcion", Input::old('descripcion'), array("class" => "form-control"))!!}
-                        @if($errors->has('descripcion'))
-                        <div class="error">{{ $errors->first('descripcion') }}</div>
-                        @endif
                     </div>
 
                     <div class="form-group col-xs-12 col-sm-12 col-lg-6">
@@ -39,6 +31,14 @@ Planes y Servicios
                         {!! Form::select('rubro_id', $rubros, null, array('class' => 'form-control')) !!}
                         @if($errors->has('rubro_id'))
                         <div class="error">{{ $errors->first('rubro_id') }}</div>
+                        @endif
+                    </div>
+                                        
+                    <div class="form-group col-xs-12 col-sm-12 col-lg-12">
+                        {!!Form::label("*Descripción:")!!}
+                        {!!Form::textarea("descripcion", Input::old('descripcion'), array("class" => "form-control"))!!}
+                        @if($errors->has('descripcion'))
+                        <div class="error">{{ $errors->first('descripcion') }}</div>
                         @endif
                     </div>
 
@@ -58,6 +58,14 @@ Planes y Servicios
                         </div>
                         @if($errors->has('tiempo_membresia'))
                         <div class="error">{{ $errors->first('tiempo_membresia') }}</div>
+                        @endif
+                    </div>
+
+                    <div class="form-group col-xs-12 col-sm-12 col-lg-6">
+                        {!! Form::label("*Período de pago:") !!}
+                        {!! Form::select('period_id', $periodos, null, array('class' => 'form-control')) !!}
+                        @if($errors->has('period_id'))
+                        <div class="error">{{ $errors->first('period_id') }}</div>
                         @endif
                     </div>
 

@@ -32,6 +32,8 @@ Plan: {{$plan->nombre}}
                         <dd class="col-lg-6 col-md-6 col-xs-12 col-sm-6">{{$plan->descripcion}}</dd>
                         <dt class="col-lg-6 col-md-6 col-xs-12 col-sm-6">Duración de la membresía:</dt>
                         <dd class="col-lg-6 col-md-6 col-xs-12 col-sm-6">{{$plan->tiempo_membresia}} {{$tiempo[$plan->unidad_tiempo]}}</dd>
+                        <dt class="col-lg-6 col-md-6 col-xs-12 col-sm-6">Período de Pago:</dt>
+                        <dd class="col-lg-6 col-md-6 col-xs-12 col-sm-6">{{$plan->periodo->nombre}}</dd>
                         <dt class="col-lg-6 col-md-6 col-xs-12 col-sm-6">Tipo:</dt>
                         <dd class="col-lg-6 col-md-6 col-xs-12 col-sm-6">{{ strtoupper($plan->tipo) }}</dd>
                         <dt class="col-lg-6 col-md-6 col-xs-12 col-sm-6">Rubro:</dt>

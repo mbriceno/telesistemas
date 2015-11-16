@@ -45,4 +45,7 @@ class Enterprise extends Model
         return $this->hasOne('App\BankAccount');
     }
 
+    public function payments() {
+        return $this->hasMany('App\PaymentOrder');
+    }
 }

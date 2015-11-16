@@ -44,7 +44,7 @@ Planes y Servicios
                                         <td>{{$plan->tiempo_membresia}} {{$plan->unidad_tiempo}}</td>
                                         <td>
                                             @if($plan->costo > 0)
-                                                {{$plan->costo}}
+                                                {{$plan->costo}} Bs.
                                             @else
                                                 Porcentaje de cobro: {{$plan->porcentaje}}%
                                             @endif

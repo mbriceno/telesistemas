@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Plan;
 use App\Rubro;
+use App\Period;
 
 class PlanController extends Controller
 {
@@ -39,8 +40,9 @@ class PlanController extends Controller
     public function create()
     {
         $rubros = Rubro::lists('nombre', 'id');
+        $periodos = Period::lists('nombre', 'id');
 
-        return view('plan.create', compact('rubros'));
+        return view('plan.create', compact('rubros','periodos'));
     }
 
     /**
@@ -67,7 +69,7 @@ class PlanController extends Controller
     {
         $plan = Plan::find($id);
         $tiempo = $this->tiempo;
-        
+
         return view('plan.show', compact('plan', 'tiempo'));
     }
 
@@ -81,8 +83,9 @@ class PlanController extends Controller
     {
         $plan = Plan::find($id);
         $rubros = Rubro::lists('nombre', 'id');
+        $periodos = Period::lists('nombre', 'id');
 
-        return view('plan.edit', compact('plan', 'rubros'));
+        return view('plan.edit', compact('plan', 'rubros', 'periodos'));
     }
 
     /**

@@ -19,6 +19,7 @@ Nuevo pago: {{$enterprise->razon_social}}
 			<div class="col-xs-12 col-sm-9 col-lg-9">
 				{!! Form::open(array("method" => "POST","route" => "admin.pagos.store","role" => "form","id"=>"formid")) !!}
 				<input type="hidden" name="enterprise_id" value="{{$enterprise->id}}">
+				<input type="hidden" name="ultimo_corte" value="@if(isset($last_order->created_at)){{$last_order->created_at}}@else{{$last_order}}@endif">
 				<div class="row">
 					<div class="form-group col-xs-6 col-sm-3 col-lg-6">
 						{!!Form::label("*Fecha de Pago:")!!}
@@ -42,7 +43,7 @@ Nuevo pago: {{$enterprise->razon_social}}
 
 					<div class="form-group col-xs-12 col-sm-12 col-lg-12">
 						{!! Form::label("*Período:") !!}
-						{!! Form::text("periodo", $enterprise->plan->nombre . ": " . $enterprise->plan->tiempo_membresia . " " . $tiempo[$enterprise->plan->unidad_tiempo] , array("class" => "form-control"))!!}
+						{!! Form::text("periodo", $period , array("class" => "form-control"))!!}
 						@if($errors->has('periodo'))
 						<div class="error">{{ $errors->first('periodo') }}</div>
 						@endif
@@ -50,7 +51,7 @@ Nuevo pago: {{$enterprise->razon_social}}
 										
 					<div class="form-group col-xs-12 col-sm-12 col-lg-6">
 						{!!Form::label("*Descripción:")!!}
-						{!!Form::textarea("descripcion", Input::old('descripcion'), array("class" => "form-control"))!!}
+						{!!Form::textarea("descripcion", $description, array("class" => "form-control"))!!}
 						@if($errors->has('descripcion'))
 						<div class="error">{{ $errors->first('descripcion') }}</div>
 						@endif
@@ -66,7 +67,7 @@ Nuevo pago: {{$enterprise->razon_social}}
 
 					<div class="form-group col-xs-12 col-sm-12 col-lg-6">
 						{!!Form::label("*Monto:")!!}
-						{!!Form::input("number", "monto", $plan_costo , array("class" => "form-control","value"=>0, "min"=>0, "step"=>"any"))!!}
+						{!!Form::input("number", "monto", $to_pay , array("class" => "form-control","value"=>0, "min"=>0, "step"=>"any"))!!}
 						@if($errors->has('monto'))
 						<div class="error">{{ $errors->first('monto') }}</div>
 						@endif

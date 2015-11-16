@@ -17,13 +17,14 @@ class Plan extends Model
         'rubro_id' => 'required',
         'tiempo_membresia' => 'required|integer',
         'unidad_tiempo' => 'required',
-        'tipo' => 'required'
+        'tipo' => 'required',
+        'period_id' => 'required'
     );
 
     protected $fillable = array('nombre', 'descripcion', 
                                 'status', 'costo', 'porcentaje',
                                 'rubro_id', 'tiempo_membresia', 
-                                'unidad_tiempo', 'tipo');
+                                'unidad_tiempo', 'tipo', 'period_id');
 	
     public function enterprises()
     {
@@ -33,5 +34,10 @@ class Plan extends Model
     public function rubro()
     {
         return $this->belongsTo('App\Rubro');
+    }
+
+    public function periodo()
+    {
+        return $this->belongsTo('App\Period','period_id');
     }
 }
