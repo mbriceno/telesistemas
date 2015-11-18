@@ -15,6 +15,13 @@
                 <a href="{{ URL::route('sale-point') }}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
             </li>
 			@endrole
+            @role('empresas.administrador')
+            <li>
+                <a href="{{ URL::route('admin.empresa.staff', Auth::user()->enterprise[0]->id) }}">
+                    <i class="fa fa-users fa-fw"></i> Usuarios
+                </a>
+            </li>
+            @endrole
             @role('superadmin|telesistemas')
             <li>
                 <a href="{{ URL::route('admin') }}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>

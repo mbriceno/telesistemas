@@ -10,6 +10,11 @@ use App\Representative;
 
 class RepresentativeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('level:90');
+    }
+
     /**
      * Display a listing of the resource.
      *

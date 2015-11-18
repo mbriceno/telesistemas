@@ -4,6 +4,12 @@
 Nuevo usuario para empresas
 @stop
 
+@section('additional-class')
+@role('empresas.administrador')
+wrapper-ventas
+@endrole
+@stop
+
 @section('content')
 
 <!-- Page Content -->
@@ -123,7 +129,7 @@ Nuevo usuario para empresas
                         {!!Form::submit("Crear usuario", array("class" => "btn btn-lg btn-success btn-block", "id" =>"btnSubmit"))!!}
                     </div>
                     <div class="form-group col-xs-12 col-sm-6 col-lg-6">
-                        <a href="{!!URL::route('admin.empresa.index')!!}" class="btn btn-lg btn-danger btn-block">Volver</a>
+                        <a href="{!! URL::route('admin.empresa.staff', $id) !!}" class="btn btn-lg btn-danger btn-block">Volver</a>
                     </div>
                 </div>
                 {!!Form::close()!!}

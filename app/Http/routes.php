@@ -28,18 +28,24 @@ Route::get('profile', ['middleware' => 'auth', function() {
     // Only authenticated users may enter...
 }]);
 
-Route::group(array('prefix' => 'admin', 'middleware' => ['auth','level:90']), function(){
-	Route::any('/',array('as'=>'admin','uses' => 'AdminController@index'));
-	Route::resource('rubro', 'RubroController');
+Route::group(array('prefix' => 'admin', 'middleware' => ['auth']), function(){
+	Route::any('/',array('as'=>'admin',
+							'middleware' => ['level:20'],
+							'uses' => 'AdminController@index'));
 	
-	Route::get('empresa/staff/{id}', array('as'=>'admin.empresa.staff','uses' => 'EnterpriseController@staff'));
+	Route::resource('rubro', 'RubroController');
 	Route::resource('empresa', 'EnterpriseController');
 	Route::resource('plan', 'PlanController');
 	Route::resource('representante', 'RepresentativeController');
 	Route::resource('bancos', 'BankController');
 	Route::resource('cuentas_bancarias', 'BankAccountController');
 
-	Route::get('usuarios_empresa/create_user/{id}', array('as'=>'admin.usuarios_empresa.create_user','uses' => 'UserEnterpriseController@create_user'));
+	Route::get('empresa/staff/{id}', 
+				array('as'=>'admin.empresa.staff', 
+						'uses' => 'UserEnterpriseController@staff'));
+	Route::get('usuarios_empresa/create_user/{id}', 
+				array('as'=>'admin.usuarios_empresa.create_user',
+						'uses' => 'UserEnterpriseController@create_user'));
 	Route::resource('usuarios_empresa', 'UserEnterpriseController');
 
 	Route::get('pagos/listato/{id}', array('as'=>'admin.pagos.listado','uses' => 'PaymentOrderController@payment_list'));
@@ -47,7 +53,7 @@ Route::group(array('prefix' => 'admin', 'middleware' => ['auth','level:90']), fu
 	Route::resource('pagos', 'PaymentOrderController');
 });
 
-Route::group(array('prefix' => 'sale-point', 'middleware' => ['auth','role:empresas.vendedor']), function(){
+Route::group(array('prefix' => 'sale-point', 'middleware' => ['auth','role:empresas.vendedor|empresas.administrador']), function(){
 	Route::any('/',array('as'=>'sale-point','uses' => 'SalePointController@index'));
 	Route::resource('orden-venta', 'SaleOrderController');
 });

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Auth;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Bican\Roles\Models\Role;
@@ -14,6 +14,10 @@ use Mail;
 
 class UserEnterpriseController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('level:20');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -32,6 +36,15 @@ class UserEnterpriseController extends Controller
     public function create()
     {
         //
+    }
+
+    /**
+     *
+    */
+    public function staff($id){
+        $staff = Enterprise::find($id)->staff()->paginate(10);
+
+        return view('enterprise.staff', compact('staff', 'id'));
     }
 
     public function create_user($id)
@@ -114,9 +127,13 @@ class UserEnterpriseController extends Controller
         $this->validate($request, Profile::$rules_update);
 
         $user = User::findOrFail($id);
-        $user->detachAllRoles();
-        $user->attachRole($request->input('role_id'));
-        $user->status = $request->input('status');
+        
+        if($user->id != Auth::user()->id){
+            $user->detachAllRoles();
+            $user->attachRole($request->input('role_id'));
+            $user->status = $request->input('status');
+        }
+        
         $profile = Profile::findOrFail($user->profile->id);
         $profile->update($request->all());
         $enterprise = $user->enterprise;

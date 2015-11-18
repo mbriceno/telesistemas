@@ -4,6 +4,12 @@
 Usuarios de empresas
 @stop
 
+@section('additional-class')
+@role('empresas.administrador')
+wrapper-ventas
+@endrole
+@stop
+
 @section('content')
 
 <div id="page-wrapper">
@@ -40,7 +46,7 @@ Usuarios de empresas
                                 @foreach ($staff as $user)
                                     <tr class="odd gradeX">
                                         <td>
-                                            <a href="{{ URL::route('admin.empresa.show',$user->id) }}">
+                                            <a href="{{ URL::route('admin.usuarios_empresa.show',$user->id) }}">
                                             {{$user->profile->nombre}} {{$user->profile->apellido}}
                                             </a><br>
                                             Usuario: {{$user->name}}<br>
@@ -59,10 +65,12 @@ Usuarios de empresas
                                             @endif
                                         </td>
                                         <td class="center box-buttons">
+                                            @if($user->id != Auth()->user()->id)
                                             {!! Form::open(array('url' => 'admin/usuarios_empresa/' . $user->id, 'class' => 'pull-right')) !!}
                                                 {!! Form::hidden('_method', 'DELETE') !!}
                                                 {!! Form::button('<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>', array('type' => 'submit', 'class' => 'btn btn-danger')) !!}
                                             {!! Form::close() !!}
+                                            @endif
                                             <a href="{{ URL::route('admin.usuarios_empresa.edit',$user->id) }}" title="Modificar" type="button" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
                                         </td>
                                     </tr>

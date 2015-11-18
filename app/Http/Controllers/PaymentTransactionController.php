@@ -6,16 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\BankAccount;
-use App\Bank;
 
-class BankAccountController extends Controller
+class PaymentTransactionController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('level:90');
-    }
-    
     /**
      * Display a listing of the resource.
      *
@@ -23,9 +16,7 @@ class BankAccountController extends Controller
      */
     public function index()
     {
-        $cuentas = BankAccount::paginate(10);
-
-        return view('banks_accounts.index', compact('cuentas'));
+        //
     }
 
     /**
@@ -46,11 +37,7 @@ class BankAccountController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, BankAccount::$rules);
-        BankAccount::create($request->all());
-
-        return redirect()->route('admin.empresa.show', $request->input('enterprise_id'))
-                        ->with('message', '<div class="alert alert-success" style="margin-top:15px">Cuenta bancaria creada con Éxito</div>');
+        //
     }
 
     /**
@@ -72,13 +59,7 @@ class BankAccountController extends Controller
      */
     public function edit($id)
     {
-        $cuenta = BankAccount::where('enterprise_id', $id)->first();
-        $bancos = Bank::lists('nombre', 'id');
-
-        if($cuenta)
-            return view('banks_accounts.edit', compact('cuenta','id','bancos'));
-        else
-            return view('banks_accounts.create', compact('id','bancos'));
+        //
     }
 
     /**
@@ -90,15 +71,7 @@ class BankAccountController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $cuenta = BankAccount::findOrFail($id);
-        $data = $request->all();
-        $this->validate($request, BankAccount::$rules);
-
-        $cuenta->update($data);
-        
-        return redirect()
-                ->route('admin.empresa.show', $request->input('enterprise_id'))
-                ->with('message', '<div class="alert alert-success" style="margin-top:15px">Cuenta Bancaria editada con Éxito</div>');
+        //
     }
 
     /**

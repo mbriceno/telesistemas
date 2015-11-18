@@ -40,19 +40,13 @@ Pagos: {{$enterprise->razon_social}}
                             <tbody>
                                 @foreach ($payments as $payment)
                                     <tr class="odd gradeX">
-                                        <td><a href="{{ URL::route('admin.pagos.show',$payment->id) }}">{{date('d/m/Y', strtotime($payment->fecha_pago))}}</a></td>
+                                        <td><a href="{{ URL::route('admin.pagos.show', $payment->id) }}">{{date('d/m/Y', strtotime($payment->fecha_pago))}}</a></td>
                                         <td>{{$payment->periodo}}</td>
                                         <td>{{$payment->monto}} Bs.</td>
                                         <td>{{$payment_status[$payment->payment_status]}}</td>
                                         <td class="center box-buttons">
-                                            {!! Form::open(array('url' => 'admin/pagos/' . $payment->id, 'class' => 'pull-right')) !!}
-                                                {!! Form::hidden('_method', 'DELETE') !!}
-                                                {!! Form::button('<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>', array('type'=>'submit', 'class' => 'btn btn-danger')) !!}
-                                            {!! Form::close() !!}
-                                            <a href="{{ URL::route('admin.pagos.edit',$payment->id) }}" title="Modificar" type="button" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
-                                            
+                                            <a href="{{ URL::route('admin.pagos.edit',$payment->id) }}" title="Modificar" type="button" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Modificar datos</a>
                                         </td>
-                                                
                                     </tr>
                                 @endforeach
                             </tbody>

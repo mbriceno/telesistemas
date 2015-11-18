@@ -80,14 +80,6 @@ Nuevo pago: {{$enterprise->razon_social}}
 						<div class="error">{{ $errors->first('payment_status') }}</div>
 						@endif
 					</div>
-
-					<!--div class="form-group col-xs-6 col-sm-3 col-lg-6">
-						{!!Form::label("*Fecha Inicio:")!!}
-						{!!Form::input('date', 'fecha_inicio', Input::old('fecha_inicio'), array("class" => "form-control",'id'=>'fecha_inicio'))!!}
-						@if($errors->has('fecha_inicio'))
-						<div class="error">{{ $errors->first('fecha_inicio') }}</div>
-						@endif
-					</div-->
 				</div>
 				<div class="row">
 					<div class="form-group col-xs-12 col-sm-6 col-lg-6">

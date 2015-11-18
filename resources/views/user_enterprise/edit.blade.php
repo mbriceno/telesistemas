@@ -4,6 +4,12 @@
 Editar datos de usuarios
 @stop
 
+@section('additional-class')
+@role('empresas.administrador')
+wrapper-ventas
+@endrole
+@stop
+
 @section('content')
 
 <!-- Page Content -->
@@ -17,6 +23,7 @@ Editar datos de usuarios
             <div class="col-xs-12 col-sm-9 col-lg-9">
                 {!! Form::model($user, array('route' => array('admin.usuarios_empresa.update', $user->id), 'method' => 'PUT','id'=>'formid')) !!}
                 <div class="row">
+                    @if($user->id != Auth()->user()->id)
                     <div class="form-group col-xs-12 col-sm-12 col-lg-6">
                         {!! Form::label("*Cargo/Tipo de usuario:") !!}
                         {!! Form::select('role_id', $roles, $user->getRoles()[0]->id, array('class' => 'form-control')) !!}
@@ -32,6 +39,7 @@ Editar datos de usuarios
                         <div class="error">{{ $errors->first('status') }}</div>
                         @endif
                     </div>
+                    @endif
 
                     <div class="form-group col-xs-12 col-sm-12 col-lg-12">
                         <h4 class="page-header">Llene estos campos si desea cambiar el password</h4>
@@ -117,7 +125,7 @@ Editar datos de usuarios
                         {!!Form::submit("Editar Datos", array("class" => "btn btn-lg btn-success btn-block", "id" =>"btnSubmit"))!!}
                     </div>
                     <div class="form-group col-xs-12 col-sm-6 col-lg-6">
-                        <a href="{!!URL::route('admin.empresa.index')!!}" class="btn btn-lg btn-danger btn-block">Volver</a>
+                        <a href="{!! URL::route('admin.empresa.staff', $user->enterprise[0]->id) !!}" class="btn btn-lg btn-danger btn-block">Volver</a>
                     </div>
                 </div>
                 {!!Form::close()!!}

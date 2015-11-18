@@ -77,7 +77,7 @@ class AuthController extends Controller
         if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password'), 'status' => 1])) {
             // Authentication passed...
             $user = Auth::user();
-            if($user->is('telesistemas'))
+            if($user->is('telesistemas') || $user->is('empresas.administrador'))
                 return redirect()->intended('admin');
             elseif ($user->is('empresas.vendedor'))
                 return redirect()->intended('sale-point');

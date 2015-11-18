@@ -39,6 +39,11 @@ class PaymentOrderController extends Controller
         'years' => 'Año(s)'
     );
 
+    public function __construct()
+    {
+        $this->middleware('level:90');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -161,7 +166,13 @@ class PaymentOrderController extends Controller
      */
     public function show($id)
     {
-        PaymentOrder::find($id);
+        $payment = PaymentOrder::findOrFail($id);
+        $payments_methods = $this->payments_methods;
+        $payment_status = $this->payment_status;
+
+        return view('payments.show', compact('payment',
+                                            'payments_methods',
+                                            'payment_status'));
     }
 
     /**
@@ -172,7 +183,13 @@ class PaymentOrderController extends Controller
      */
     public function edit($id)
     {
-        //
+        $payment = PaymentOrder::find($id);
+        $payments_methods = $this->payments_methods;
+        $payment_status = $this->payment_status;
+
+        return view('payments.edit', compact('payment',
+                                            'payments_methods',
+                                            'payment_status'));
     }
 
     /**
@@ -184,7 +201,14 @@ class PaymentOrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $payment = PaymentOrder::findOrFail($id);
+        $data = $request->all();
+        $this->validate($request, PaymentOrder::$rules);
+
+        $payment->update($data);
+        return redirect()
+                ->route('admin.pagos.listado', $request->input('enterprise_id'))
+                ->with('message', '<div class="alert alert-success" style="margin-top:15px">Datos actualizados con Éxito</div>');
     }
 
     /**
