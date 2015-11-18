@@ -15,7 +15,6 @@ Registar pago
 				<h1 class="page-header">Registrar pago</h1>
 			</div>
 			<!-- /.col-lg-12 -->
-			{!!HTML::ul($errors->all())!!}
 			<div class="col-xs-12 col-sm-9 col-lg-9">
 				@if (Session::has('message'))
 	                {!! Session::get('message') !!}
@@ -64,7 +63,7 @@ Registar pago
 						{!!Form::submit("Registrar Pago", array("class" => "btn btn-lg btn-success btn-block", "id" =>"btnSubmit"))!!}
 					</div>
 					<div class="form-group col-xs-12 col-sm-6 col-lg-6">
-						<a href="{!! URL::route('admin.pagos.listado', Auth::user()->enterprise[0]->id) !!}" class="btn btn-lg btn-danger btn-block">Volver</a>
+						<a href="{!! URL::route('admin.pagos.listado', $payment->enterprise->id) !!}" class="btn btn-lg btn-danger btn-block">Volver</a>
 					</div>
 				</div>
 				{!!Form::close()!!}

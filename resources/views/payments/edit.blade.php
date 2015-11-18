@@ -14,7 +14,6 @@ Nuevo pago: {{$payment->enterprise->razon_social}}
                 <h1 class="page-header">Registrar pago: {{$payment->enterprise->razon_social}}</h1>
             </div>
             <!-- /.col-lg-12 -->
-            {!!HTML::ul($errors->all())!!}
             <div class="col-xs-12 col-sm-9 col-lg-9">
                 {!! Form::model($payment, array('route' => array('admin.pagos.update', $payment->id), 'method' => 'PUT','id'=>'formid')) !!}
                 <input type="hidden" name="enterprise_id" value="{{$payment->enterprise->id}}">

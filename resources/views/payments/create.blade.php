@@ -15,7 +15,6 @@ Nuevo pago: {{$enterprise->razon_social}}
 				<h1 class="page-header">Registrar pago: {{$enterprise->razon_social}}</h1>
 			</div>
 			<!-- /.col-lg-12 -->
-			{!!HTML::ul($errors->all())!!}
 			<div class="col-xs-12 col-sm-9 col-lg-9">
 				{!! Form::open(array("method" => "POST","route" => "admin.pagos.store","role" => "form","id"=>"formid")) !!}
 				<input type="hidden" name="enterprise_id" value="{{$enterprise->id}}">
