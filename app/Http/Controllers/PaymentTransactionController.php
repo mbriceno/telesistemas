@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\PaymentOrder;
+use App\Enterprise;
+use App\SaleOrder;
+use App\PaymentTransaction
 
 class PaymentTransactionController extends Controller
 {
