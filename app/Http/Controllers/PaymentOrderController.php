@@ -41,7 +41,8 @@ class PaymentOrderController extends Controller
 
     public function __construct()
     {
-        $this->middleware('level:90');
+        $this->middleware('level:20', ['only' => ['payment_list', 'show']]);
+        $this->middleware('level:90', ['except' => ['payment_list', 'show']]);
     }
 
     /**

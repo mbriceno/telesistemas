@@ -21,6 +21,11 @@
                     <i class="fa fa-users fa-fw"></i> Usuarios
                 </a>
             </li>
+            <li>
+                <a href="{{ URL::route('admin.pagos.listado', Auth::user()->enterprise[0]->id) }}">
+                    <i class="glyphicon glyphicon-credit-card"></i> Pagos
+                </a>
+            </li>
             @endrole
             @role('superadmin|telesistemas')
             <li>

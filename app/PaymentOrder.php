@@ -27,4 +27,8 @@ class PaymentOrder extends Model
     {
         return $this->belongsTo('App\Enterprise');
     }
+
+    public function payment_transactions(){
+        return $this->hasMany('App\PaymentTransaction');
+    }
 }

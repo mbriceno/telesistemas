@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Artisaninweb\SoapWrapper\Facades\SoapWrapper;
 use Auth;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -98,6 +99,29 @@ class SaleOrderController extends Controller
     public function update(Request $request, $id)
     {
         //
+    }
+
+    function payment_step1(){
+        SoapWrapper::add(function ($service) {
+            $service
+                ->name('payment')
+                ->wsdl('https://esitef-homologacao.softwareexpress.com.br/e-sitef-html/Payment2?wsdl')
+                ->trace(true);  // Optional: (parameter: true/false)
+
+        });
+
+        /*$data = [
+            'CurrencyFrom' => 'USD',
+            'CurrencyTo'   => 'EUR',
+            'RateDate'     => '2014-06-05',
+            'Amount'       => '1000'
+        ];*/
+
+        // Using the added service
+        SoapWrapper::service('payment', function ($service) use ($data) {
+            var_dump($service->getFunctions());
+            /*var_dump($service->call('GetConversionAmount', [$data])->GetConversionAmountResult);*/
+        });
     }
 
     /**

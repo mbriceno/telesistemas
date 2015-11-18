@@ -51,9 +51,16 @@ Route::group(array('prefix' => 'admin', 'middleware' => ['auth']), function(){
 	Route::get('pagos/listato/{id}', array('as'=>'admin.pagos.listado','uses' => 'PaymentOrderController@payment_list'));
 	Route::get('pagos/nuevo-pago/{id}', array('as'=>'admin.pagos.create_payment','uses' => 'PaymentOrderController@create_payment'));
 	Route::resource('pagos', 'PaymentOrderController');
+
+	Route::get('pagos-transaccion/nuevo-pago/{id}', 
+				array('as'=>'admin.pagos-transaccion.payment_record',
+						'uses' => 'PaymentTransactionController@payment_record'));
+	Route::resource('pagos-transaccion', 'PaymentTransactionController');
 });
 
 Route::group(array('prefix' => 'sale-point', 'middleware' => ['auth','role:empresas.vendedor|empresas.administrador']), function(){
 	Route::any('/',array('as'=>'sale-point','uses' => 'SalePointController@index'));
+	Route::get('orden-venta/pago-paso1', array('as'=>'sale-point.orden-venta.pago-paso1',
+									'uses' => 'SaleOrderController@payment_step1'));
 	Route::resource('orden-venta', 'SaleOrderController');
 });

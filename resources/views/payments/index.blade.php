@@ -14,7 +14,9 @@ Pagos: {{$enterprise->razon_social}}
                 
         <div class="col-xs-12 col-sm-12 col-lg-12">
             <div class="bar-buttons-action">
+                @role('superadmin|telesistemas')
                 <a class="btn btn-success" href="{{ URL::route('admin.pagos.create_payment', $enterprise->id) }}">Registrar nuevo pago</a>
+                @endrole
             </div>
             <!-- will be used to show any messages -->
             @if (Session::has('message'))
@@ -45,7 +47,16 @@ Pagos: {{$enterprise->razon_social}}
                                         <td>{{$payment->monto}} Bs.</td>
                                         <td>{{$payment_status[$payment->payment_status]}}</td>
                                         <td class="center box-buttons">
-                                            <a href="{{ URL::route('admin.pagos.edit',$payment->id) }}" title="Modificar" type="button" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Modificar datos</a>
+                                            @role('superadmin|telesistemas')
+                                            <a href="{{ URL::route('admin.pagos.edit',$payment->id) }}" title="Modificar" type="button" class="btn btn-primary pull-right">
+                                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Modificar
+                                            </a>
+                                            @endrole
+                                            @if($payment->payment_status != 'PDO' && $payment->payment_status != 'VFP')
+                                            <a href="{{ URL::route('admin.pagos-transaccion.payment_record',$payment->id) }}" title="Pagar" type="button" class="btn btn-primary pull-right">
+                                                <span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span> Pagar
+                                            </a>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
