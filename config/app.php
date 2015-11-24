@@ -147,6 +147,8 @@ return [
         Illuminate\Html\HtmlServiceProvider::class,
         Bican\Roles\RolesServiceProvider::class,
         Artisaninweb\SoapWrapper\ServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
     ],
 
     /*
@@ -198,7 +200,8 @@ return [
         'HTML'      => Illuminate\Html\HtmlFacade::class,
         'Form'      => Illuminate\Html\FormFacade::class,
         'SoapWrapper' => Artisaninweb\SoapWrapper\Facades\SoapWrapper::class,
-
+        'Excel'     => Maatwebsite\Excel\Facades\Excel::class,
+        'PDF'       => Barryvdh\DomPDF\Facade::class,
     ],
 
 ];

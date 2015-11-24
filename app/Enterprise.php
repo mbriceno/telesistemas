@@ -48,4 +48,8 @@ class Enterprise extends Model
     public function payments() {
         return $this->hasMany('App\PaymentOrder');
     }
+
+    public function sale_orders() {
+        return $this->hasMany('App\SaleOrder');
+    }
 }
