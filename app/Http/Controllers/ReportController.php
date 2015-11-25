@@ -8,6 +8,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Plan;
 use App\Enterprise;
+use App\PaymentOrder;
+use Log;
 
 class ReportController extends Controller
 {
@@ -60,17 +62,23 @@ class ReportController extends Controller
         }
 		elseif ($request->input('sort') == 'totals') {
             $enterprises = Enterprise::select('enterprises.*','planes.created_at AS created_date',
-												'planes.id AS plan_id', \DB::raw('SUM(sale_orders.total) as total_sales'))
+												'planes.id AS plan_id',
+                                                \DB::raw('(select SUM(so.total) from sale_orders as so where so.enterprise_id = enterprises.id) AS total_sales'))
                             ->leftJoin('planes', 'planes.id', '=', 'enterprises.plan_id')
-                            ->leftJoin('sale_orders', 'sale_orders.enterprise_id', '=', 'sale_orders.id')
                             ->orderBy('total_sales', $order);
         }
 
         //Filters
         $filtros = array();
+        $monto_plan = $planObj = null;
         if($request->input('tipo_plan')){
             $enterprises = $enterprises->where('plan_id', $request->input('tipo_plan'));
             $filtros['tipo_plan'] = $request->input('tipo_plan');
+            $planObj = Plan::find($request->input('tipo_plan'));
+            $monto_plan = Enterprise::select(\DB::raw('SUM(payment_orders.monto) AS total_sales'))
+                            ->where('plan_id', $request->input('tipo_plan'))
+                            ->leftJoin('payment_orders', 'payment_orders.enterprise_id', '=', 'enterprises.id')
+                            ->first();
         }
 		if($request->input('fecha_inic') != '' && $request->input('fecha_fin') != ''){
 			$inic_arr = explode('/', $request->input('fecha_inic'));
@@ -93,6 +101,7 @@ class ReportController extends Controller
 		}
 
         $enterprises = $enterprises->paginate(10);
+        //Log::info($lastQuery);
 
         $order_colunm = $order=='ASC' ? 'desc':'asc';
 
@@ -104,7 +113,8 @@ class ReportController extends Controller
         return view('report.index', compact('enterprises','order_colunm',
                                             'planes','filtros',
                                             'param_nombre','param_date',
-                                            'param_plan','param_total'));
+                                            'param_plan','param_total',
+                                            'monto_plan','planObj'));
     }
 
     /**

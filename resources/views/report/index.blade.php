@@ -64,6 +64,24 @@ Planes y Servicios
                         </form>
                     </div>
                     <div class="dataTable_wrapper table-responsive">
+                        @if(isset($filtros['tipo_plan']))
+                        <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                            <thead>
+                                <tr>
+                                    <th>Plan</th>
+                                    <th>Numero de Empresas afiliadas</th>
+                                    <th>Ingreso totales</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{{$planObj->nombre}}</td>
+                                    <td>{{count($planObj->enterprises)}}</td>
+                                    <td>{{number_format($monto_plan->total_sales, 2, ',', '.')}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        @endif
                         <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                             <thead>
                                 <tr>
@@ -71,7 +89,6 @@ Planes y Servicios
                                     <th><a href="{{ URL::route('admin.reportes.planes', $param_date) }}">Activa desde</a></th>
                                     <th><a href="{{ URL::route('admin.reportes.planes', $param_plan) }}">Plan</a></th>
                                     <th><a href="{{ URL::route('admin.reportes.planes', $param_total) }}">Ingreso total</a></th>
-                                    <th class="col-lg-3">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -81,7 +98,6 @@ Planes y Servicios
                                         <td>{{date("d/m/Y", strtotime($en->created_at))}}</td>
                                         <td>{{$en->plan->nombre}}</td>
                                         <td>{{number_format($en->sale_orders->sum('total'), 2, ',', '.')}}</td>
-                                        <td class="center box-buttons"></td>
                                     </tr>
                                 @endforeach
                             </tbody>
