@@ -32,15 +32,32 @@ Planes y Servicios
                             <input type="hidden" name="sort" value="{{ Request::input('sort')}}">
                             <input type="hidden" name="order" value="{{ Request::input('order')}}">
                             <div class="form-group col-xs-12 col-sm-12 col-lg-4">
-                                <label>Tipo de plan</label>
                                 <select name="tipo_plan" class="form-control">
+									<option value="">Tipo de plan</option>
                                 @foreach($planes as $plan )
-                                    <option value="{{$plan->id}}">{{$plan->nombre}}</option>
+                                    <option value="{{$plan->id}}" @if(isset($filtros['tipo_plan']) && $filtros['tipo_plan']==$plan->id)selected="selected"@endif>{{$plan->nombre}}</option>
                                 @endforeach
                                 </select>
                             </div>
-                            <div class="form-group col-xs-12 col-sm-12 col-lg-4">
-                                <input type="submit" value="filtrar" class="btn btn-default">
+							<div class="form-group col-lg-4">
+								<div class='input-group date' id='datetimepicker6'>
+									<input type='text' class="form-control" name="fecha_inic" value="@if(isset($filtros['fecha_inic'])){{$filtros['fecha_inic']}}@endif" />
+									<span class="input-group-addon">
+										<span class="glyphicon glyphicon-calendar"></span>
+									</span>
+								</div>
+							</div>
+							<div class="form-group col-lg-4">
+								<div class='input-group date' id='datetimepicker7'>
+									<input type='text' class="form-control" name="fecha_fin" value="@if(isset($filtros['fecha_fin'])){{$filtros['fecha_fin']}}@endif" />
+									<span class="input-group-addon">
+										<span class="glyphicon glyphicon-calendar"></span>
+									</span>
+								</div>
+							</div>
+                            <div class="form-group col-xs-12 col-sm-12 col-lg-6">
+                                <input type="submit" value="Aplicar filtros" class="btn btn-primary">
+								<a href="{{ URL::route('admin.reportes.planes') }}" class="btn btn-danger">Limpiar filtros</a>
                             </div>
                         </div>
                         
@@ -53,7 +70,7 @@ Planes y Servicios
                                     <th><a href="{{ URL::route('admin.reportes.planes', $param_nombre) }}">Nombre</a></th>
                                     <th><a href="{{ URL::route('admin.reportes.planes', $param_date) }}">Activa desde</a></th>
                                     <th><a href="{{ URL::route('admin.reportes.planes', $param_plan) }}">Plan</a></th>
-                                    <th>Ingreso total</th>
+                                    <th><a href="{{ URL::route('admin.reportes.planes', $param_total) }}">Ingreso total</a></th>
                                     <th class="col-lg-3">Acciones</th>
                                 </tr>
                             </thead>
@@ -84,5 +101,21 @@ Planes y Servicios
     <!-- /.row -->
 </div>
 <!-- /#page-wrapper -->
-
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker6').datetimepicker({
+			format: 'DD/MM/YYYY'
+		});
+        $('#datetimepicker7').datetimepicker({
+            useCurrent: false, //Important! See issue #1075
+			format: 'DD/MM/YYYY'
+        });
+        $("#datetimepicker6").on("dp.change", function (e) {
+            $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+        });
+        $("#datetimepicker7").on("dp.change", function (e) {
+            $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+        });
+    });
+</script>
 @stop

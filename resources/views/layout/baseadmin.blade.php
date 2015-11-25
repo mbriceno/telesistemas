@@ -12,6 +12,7 @@
     {!! HTML::style('assets/css/bootstrap.min.css') !!}
     {!! HTML::style('assets/css/timeline.css') !!}
     {!! HTML::style('assets/css/sb-admin.css') !!}
+    {!! HTML::style('assets/css/bootstrap-datetimepicker.min.css') !!}
 	{!! HTML::style('assets/admin_page/metisMenu/dist/metisMenu.min.css') !!}
 	{!! HTML::style('assets/font-awesome/css/font-awesome.min.css') !!}
     
@@ -20,7 +21,9 @@
     {!! HTML::style('assets/css/telesistema-aux.css') !!}
 
     {!! HTML::script('assets/js/jquery.min.js') !!}
+    {!! HTML::script('assets/js/moment.js') !!}
     {!! HTML::script('assets/js/bootstrap.min.js') !!}
+    {!! HTML::script('assets/js/bootstrap-datetimepicker.min.js') !!}
 	{!! HTML::script('assets/admin_page/metisMenu/dist/metisMenu.min.js') !!}
     {!! HTML::script('assets/js/morris.min.js') !!}
     {!! HTML::script('assets/js/sb-admin-2.js') !!}
