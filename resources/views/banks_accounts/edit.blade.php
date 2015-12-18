@@ -40,6 +40,7 @@ Cuentas
                         @if($errors->has('rif_ci'))
                         <div class="error">{{ $errors->first('rif_ci') }}</div>
                         @endif
+                        <small>Ej.:V-XXXXXXXX</small>
                     </div>
 
                     <div class="form-group col-xs-12 col-sm-12 col-lg-6">

@@ -66,6 +66,7 @@ Empresa: {{$empresa->razon_social}}
                     </div>
                     @endforeach
                 </div>
+                @if($empresa->bank_account)
                 <div class="row box-info-show">
                     <h3>Información bancaria</h3>
                     <div class="well col-xs-12 col-sm-12 col-lg-12" style="margin-top:15px">
@@ -86,6 +87,7 @@ Empresa: {{$empresa->razon_social}}
                         </div>
                     </div>
                 </div>
+                @endif
             </div>
         </div>
     </div>

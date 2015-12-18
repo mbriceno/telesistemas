@@ -63,7 +63,8 @@ Route::group(array('prefix' => 'admin', 'middleware' => ['auth']), function(){
 	Route::resource('pagos-transaccion', 'PaymentTransactionController');
 
 	Route::get('reportes/planes', array('as'=>'admin.reportes.planes','uses' => 'ReportController@planes'));
-	Route::get('reportes/ventas', array('as'=>'admin.reportes.ventas','uses' => 'ReportController@index'));
+	Route::get('reportes/ventas', array('as'=>'admin.reportes.ventas','uses' => 'ReportController@ventas'));
+	Route::get('reportes/ventas/excel', array('as'=>'admin.reportes.ventas.excel','uses' => 'ReportController@ventas_a_excel'));
 	Route::resource('reportes', 'ReportController');
 });
 

@@ -87,6 +87,7 @@ wrapper-ventas
                     <div class="form-group col-xs-12 col-sm-12 col-lg-6">
                         {!! Form::label("*C.I.:") !!}
                         {!!Form::text("ci", Input::old('ci'), array("class" => "form-control"))!!}
+                        <small>Ej.:V-XXXXXXXX</small>
                         @if($errors->has('ci'))
                         <div class="error">{{ $errors->first('ci') }}</div>
                         @endif

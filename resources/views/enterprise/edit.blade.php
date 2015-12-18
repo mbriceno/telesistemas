@@ -50,6 +50,7 @@ Empresas
                         @if($errors->has('rif'))
                         <div class="error">{{ $errors->first('rif') }}</div>
                         @endif
+                        <small>Ej.:J-XXXXXXXX</small>
                     </div>
                                         
                     <div class="form-group col-xs-12 col-sm-12 col-lg-6">

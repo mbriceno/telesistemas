@@ -46,9 +46,7 @@ wrapper-ventas
                                 @foreach ($staff as $user)
                                     <tr class="odd gradeX">
                                         <td>
-                                            <a href="{{ URL::route('admin.usuarios_empresa.show',$user->id) }}">
-                                            {{$user->profile->nombre}} {{$user->profile->apellido}}
-                                            </a><br>
+                                            {{$user->profile->nombre}} {{$user->profile->apellido}}<br>
                                             Usuario: {{$user->name}}<br>
                                             E-mail: {{$user->email}}<br>
                                         </td>

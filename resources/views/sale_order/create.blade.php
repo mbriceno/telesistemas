@@ -36,6 +36,7 @@ wrapper-ventas
                         @if($errors->has('ci_rif'))
                         <div class="error">{{ $errors->first('ci_rif') }}</div>
                         @endif
+                        <small>Ej.:V-XXXXXXXX</small>
                     </div>
 										
 					<div class="form-group col-xs-12 col-sm-12 col-lg-12">

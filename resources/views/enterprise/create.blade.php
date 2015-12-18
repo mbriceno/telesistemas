@@ -39,6 +39,7 @@ Empresas
                         @if($errors->has('rif'))
                         <div class="error">{{ $errors->first('rif') }}</div>
                         @endif
+                        <small>Ej.:V-XXXXXXXX</small>
                     </div>
                                         
                     <div class="form-group col-xs-12 col-sm-12 col-lg-6">
@@ -106,6 +107,7 @@ Empresas
                         @if($errors->has('ci_rl'))
                         <div class="error">{{ $errors->first('ci_rl') }}</div>
                         @endif
+                        <small>Ej.:V-XXXXXXXX</small>
                     </div>
 
                     <div class="form-group col-xs-12 col-sm-12 col-lg-6">
@@ -165,6 +167,7 @@ Empresas
                         @if($errors->has('ci_ct'))
                         <div class="error">{{ $errors->first('ci_ct') }}</div>
                         @endif
+                        <small>Ej.:V-XXXXXXXX</small>
                     </div>
 
                     <div class="form-group col-xs-12 col-sm-12 col-lg-6">
@@ -173,6 +176,7 @@ Empresas
                         @if($errors->has('rif_ct'))
                         <div class="error">{{ $errors->first('rif_ct') }}</div>
                         @endif
+                        <small>Ej.:J-XXXXXXXX</small>
                     </div>
                                         
                     <div class="form-group col-xs-12 col-sm-12 col-lg-6">
