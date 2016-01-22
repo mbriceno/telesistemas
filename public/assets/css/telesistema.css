@@ -99,3 +99,6 @@ div#wrapper {
 #page-wrapper.content-ventas .box-total-total div {
   padding-right: 0;
 }
+#page-wrapper > .row {
+  margin-right: 0;
+}
