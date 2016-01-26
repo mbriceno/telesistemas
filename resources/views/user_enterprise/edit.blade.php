@@ -81,12 +81,11 @@ wrapper-ventas
                     </div>
 
                     <div class="form-group col-xs-12 col-sm-12 col-lg-6">
-                        {!! Form::label("*C.I.:") !!}
+                        <label>*C.I.: <i class="fa fa-info-circle fa-fw" data-toggle="tooltip" data-placement="right" title="Utilice el formato: V-XXXXXXXX"></i></label>
                         {!!Form::text("ci", $user->profile->ci, array("class" => "form-control"))!!}
                         @if($errors->has('ci'))
                         <div class="error">{{ $errors->first('ci') }}</div>
                         @endif
-                        <small>Ej.:V-XXXXXXXX</small>
                     </div>
 
                     <div class="form-group col-xs-12 col-sm-12 col-lg-6">
@@ -142,6 +141,9 @@ wrapper-ventas
 $.mask.definitions['~']='[VvJjEePp]';
 $('input[name="rif"]').mask("~-9999999?999",{placeholder:" "});
 $('input[name="telefono"]').mask("9999-9999999",{placeholder:" "});
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip();
+});
 </script>
 
 @stop

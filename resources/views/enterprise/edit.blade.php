@@ -45,12 +45,11 @@ Empresas
                     </div>
 
                     <div class="form-group col-xs-12 col-sm-12 col-lg-6">
-                        {!! Form::label("*R.I.F.:") !!}
+                        <label>*R.I.F.: <i class="fa fa-info-circle fa-fw" data-toggle="tooltip" data-placement="right" title="Utilice el formato: V-XXXXXXXX"></i></label>
                         {!!Form::text("rif", Input::old('rif'), array("class" => "form-control"))!!}
                         @if($errors->has('rif'))
                         <div class="error">{{ $errors->first('rif') }}</div>
                         @endif
-                        <small>Ej.:J-XXXXXXXX</small>
                     </div>
                                         
                     <div class="form-group col-xs-12 col-sm-12 col-lg-6">

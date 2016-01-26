@@ -8,11 +8,21 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
+                @role('telesistemas')
                 <a class="navbar-brand" href="{{ URL::route('admin') }}">
                     Telesistema Web | Administrador
-
-
                 </a>
+                @endrole
+                @role('empresas.vendedor')
+                <a class="navbar-brand" href="{{ URL::route('admin') }}">
+                    {{Auth::user()->enterprise[0]->razon_social}} | Vendedor
+                </a>
+                @endrole
+                @role('empresas.administrador')
+                <a class="navbar-brand" href="{{ URL::route('admin') }}">
+                    {{Auth::user()->enterprise[0]->razon_social}} | Administrador
+                </a>
+                @endrole
             </div>
             <!-- /.navbar-header -->
 

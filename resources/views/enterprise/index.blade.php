@@ -35,7 +35,7 @@ Empresas
                                     <th>R.I.F.</th>
                                     <th>E-mail</th>
                                     <th>Estatus</th>
-                                    <th class="col-lg-3">Acciones</th>
+                                    <th class="col-lg-2">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -52,19 +52,20 @@ Empresas
                                                 Inactivo
                                             @endif
                                         </td>
-                                        <td class="center box-buttons">
-                                            {!! Form::open(array('url' => 'admin/empresa/' . $enterprise->id, 'class' => 'pull-right')) !!}
+                                        <td class="center box-buttons box-enterprises">
+                                            <a href="{{ URL::route('admin.empresa.staff', $enterprise->id) }}" title="Usuarios de empresas" type="button" class="btn btn-primary">
+                                                <span class="fa fa-users" aria-hidden="true"></span>
+                                            </a>
+                                            <a href="{{ URL::route('admin.pagos.listado',$enterprise->id) }}" title="Ordenes de Pago" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span></a>
+                                            <a href="{{ URL::route('admin.pagos-empresas.listado',$enterprise->id) }}" title="Ordenes de débito" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-usd" aria-hidden="true"></span></a>
+                                            <a href="{{ URL::route('admin.cuentas_bancarias.edit', $enterprise->id) }}" title="@if($enterprise->bank_account) Modificar cuenta bancaria @else Agregar datos Bancarios @endif" type="button" class="btn btn-primary">
+                                                <span class="fa fa-university" aria-hidden="true"></span>
+                                            </a>
+                                            <a href="{{ URL::route('admin.empresa.edit',$enterprise->id) }}" title="Modificar" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                                            {!! Form::open(array('url' => 'admin/empresa/' . $enterprise->id, 'class' => '')) !!}
                                                 {!! Form::hidden('_method', 'DELETE') !!}
                                                 {!! Form::button('<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>', array('type' => 'submit', 'class' => 'btn btn-danger')) !!}
                                             {!! Form::close() !!}
-                                            <a href="{{ URL::route('admin.empresa.edit',$enterprise->id) }}" title="Modificar" type="button" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
-                                            <a href="{{ URL::route('admin.pagos.listado',$enterprise->id) }}" title="Agregar Pago" type="button" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span></a>
-                                            <a href="{{ URL::route('admin.cuentas_bancarias.edit', $enterprise->id) }}" title="@if($enterprise->bank_account) Modificar cuenta bancaria @else Agregar datos Bancarios @endif" type="button" class="btn btn-primary pull-right">
-                                                <span class="fa fa-university" aria-hidden="true"></span>
-                                            </a>
-                                            <a href="{{ URL::route('admin.empresa.staff', $enterprise->id) }}" title="Usuarios de empresas" type="button" class="btn btn-primary pull-right">
-                                                <span class="fa fa-users" aria-hidden="true"></span>
-                                            </a>
                                         </td>
                                                 
                                     </tr>

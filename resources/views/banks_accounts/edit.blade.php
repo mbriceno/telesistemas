@@ -35,12 +35,11 @@ Cuentas
                     </div>
 
                     <div class="form-group col-xs-12 col-sm-12 col-lg-6">
-                        {!! Form::label("*C.I/R.i.F:") !!}
+                        <label>*C.I/R.i.F: <i class="fa fa-info-circle fa-fw" data-toggle="tooltip" data-placement="right" title="Utilice el formato: V-XXXXXXXX"></i></label>
                         {!!Form::text("rif_ci", Input::old('rif_ci'), array("class" => "form-control"))!!}
                         @if($errors->has('rif_ci'))
                         <div class="error">{{ $errors->first('rif_ci') }}</div>
                         @endif
-                        <small>Ej.:V-XXXXXXXX</small>
                     </div>
 
                     <div class="form-group col-xs-12 col-sm-12 col-lg-6">
@@ -79,6 +78,9 @@ Cuentas
 <script type="text/javascript">
 $.mask.definitions['~']='[VvJjEePp]';
 $('input[name="rif_ci"], input[name="ci"]').mask("~-9999999?999",{placeholder:" "});
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip();
+});
 </script>
 
 @stop

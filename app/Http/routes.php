@@ -53,7 +53,7 @@ Route::group(array('prefix' => 'admin', 'middleware' => ['auth']), function(){
 						'uses' => 'UserEnterpriseController@create_user'));
 	Route::resource('usuarios_empresa', 'UserEnterpriseController');
 
-	Route::get('pagos/listato/{id}', array('as'=>'admin.pagos.listado','uses' => 'PaymentOrderController@payment_list'));
+	Route::get('pagos/listado/{id}', array('as'=>'admin.pagos.listado','uses' => 'PaymentOrderController@payment_list'));
 	Route::get('pagos/nuevo-pago/{id}', array('as'=>'admin.pagos.create_payment','uses' => 'PaymentOrderController@create_payment'));
 	Route::resource('pagos', 'PaymentOrderController');
 
@@ -66,6 +66,10 @@ Route::group(array('prefix' => 'admin', 'middleware' => ['auth']), function(){
 	Route::get('reportes/ventas', array('as'=>'admin.reportes.ventas','uses' => 'ReportController@ventas'));
 	Route::get('reportes/ventas/excel', array('as'=>'admin.reportes.ventas.excel','uses' => 'ReportController@ventas_a_excel'));
 	Route::resource('reportes', 'ReportController');
+
+	Route::get('pagos-empresas/listado/{id}', array('as'=>'admin.pagos-empresas.listado','uses' => 'DebitOrderController@debit_list'));
+	Route::get('pagos-empresas/nuevo-debito/{id}', array('as'=>'admin.pagos-empresas.create_debit','uses' => 'DebitOrderController@create_debit'));
+	Route::resource('pagos-empresas', 'DebitOrderController');
 });
 
 Route::group(array('prefix' => 'sale-point', 'middleware' => ['auth','role:empresas.vendedor|empresas.administrador']), function(){

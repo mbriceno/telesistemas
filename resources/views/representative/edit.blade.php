@@ -34,16 +34,15 @@ Representantes
                     </div>
 
                     <div class="form-group col-xs-12 col-sm-12 col-lg-6">
-                        {!! Form::label("*C.I.:") !!}
+                        <label>*C.I.: <i class="fa fa-info-circle fa-fw" data-toggle="tooltip" data-placement="right" title="Utilice el formato: V-XXXXXXXX"></i></label>
                         {!!Form::text("ci", Input::old('ci'), array("class" => "form-control"))!!}
                         @if($errors->has('ci'))
                         <div class="error">{{ $errors->first('ci') }}</div>
                         @endif
-                        <small>Ej.:V-XXXXXXXX</small>
                     </div>
 
                     <div class="form-group col-xs-12 col-sm-12 col-lg-6">
-                        {!! Form::label("*R.I.F.:") !!}
+                        <label>*R.I.F.: <i class="fa fa-info-circle fa-fw" data-toggle="tooltip" data-placement="right" title="Utilice el formato: V-XXXXXXXX"></i></label>
                         {!!Form::text("rif", Input::old('rif'), array("class" => "form-control"))!!}
                         @if($errors->has('rif'))
                         <div class="error">{{ $errors->first('rif') }}</div>
@@ -79,7 +78,7 @@ Representantes
                         {!!Form::submit("Actualizar", array("class" => "btn btn-lg btn-success btn-block", "id" =>"btnSubmit"))!!}
                     </div>
                     <div class="form-group col-xs-12 col-sm-6 col-lg-6">
-                        <a href="{!!URL::route('admin.empresa.index')!!}" class="btn btn-lg btn-danger btn-block">Volver</a>
+                        <a href="{!!URL::route('admin.empresa.show',$representante->enterprises[0]->id)!!}" class="btn btn-lg btn-danger btn-block">Volver</a>
                     </div>
                 </div>
                 {!!Form::close()!!}
@@ -95,6 +94,9 @@ Representantes
 $.mask.definitions['~']='[VvJjEePp]';
 $('input[name="rif"], input[name="ci"]').mask("~-9999999?999",{placeholder:" "});
 $('input[name="telefono"]').mask("9999-9999999",{placeholder:" "});
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip();
+});
 </script>
 
 @stop
