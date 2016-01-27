@@ -23,7 +23,12 @@
             </li>
             <li>
                 <a href="{{ URL::route('admin.pagos.listado', Auth::user()->enterprise[0]->id) }}">
-                    <i class="glyphicon glyphicon-credit-card"></i> Pagos
+                    <i class="glyphicon glyphicon-credit-card"></i> Pagos de plan
+                </a>
+            </li>
+			<li>
+                <a href="{{ URL::route('admin.pagos-empresas.listado', Auth::user()->enterprise[0]->id) }}">
+                    <i class="glyphicon glyphicon-usd"></i> Dépositos
                 </a>
             </li>
             @endrole

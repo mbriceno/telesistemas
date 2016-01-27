@@ -27,6 +27,7 @@ class AuthController extends Controller
 
     protected $redirectPath = '/admin';
     protected $redirectAfterLogout = '/';
+	protected $loginPath = '/';
 
     /**
      * Create a new authentication controller instance.
@@ -81,6 +82,8 @@ class AuthController extends Controller
                 return redirect()->intended('admin');
             elseif ($user->is('empresas.vendedor'))
                 return redirect()->intended('sale-point');
-        }
+        }else{
+			return redirect()->intended('/')->with('message', '<div class="alert alert-danger" style="margin-top:15px">E-mail o password incorrectos</div>');
+		}
     }
 }

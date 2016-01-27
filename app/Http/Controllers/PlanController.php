@@ -121,7 +121,12 @@ class PlanController extends Controller
      */
     public function destroy($id)
     {
-        Plan::destroy($id);
+		$plan = Plan::find($id);
+		if(count($plan->enterprises)>0){
+			return redirect()->route('admin.plan.index')->with('message', '<div class="alert alert-warning" style="margin-top:15px">Este plan contiene empresas asociadas por ende no puede ser eliminado</div>');
+		}else{
+        	$plan->delete();
+		}
 
         return redirect()->route('admin.plan.index')->with('message', '<div class="alert alert-success" style="margin-top:15px">Plan eliminado con Éxito</div>');
     }

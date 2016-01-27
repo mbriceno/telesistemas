@@ -17,6 +17,9 @@ wrapper-login
                     <h3 class="panel-title">Please Sign In</h3>
                 </div>
                 <div class="panel-body">
+					@if (Session::has('message'))
+		                {!! Session::get('message') !!}
+		            @endif
                     <form method="POST" action="/auth/login" role="form">
                         {!! csrf_field() !!}
                         <fieldset>

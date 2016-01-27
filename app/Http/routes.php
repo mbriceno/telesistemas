@@ -16,13 +16,13 @@
 	var_dump($query);
 });*/
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
+});*/
 
 // Authentication routes...
 Route::get('/', 'Auth\AuthController@getLogin');
-Route::post('/auth/login', 'Auth\AuthController@authenticate');
+Route::post('auth/login', 'Auth\AuthController@authenticate');
 Route::get('auth/logout', 'Auth\AuthController@getLogout')->name('logout');
 
 // Registration routes...

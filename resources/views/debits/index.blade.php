@@ -1,5 +1,11 @@
 @extends('layout.baseadmin')
 
+@section('additional-class')
+@role('empresas.administrador')
+wrapper-ventas
+@endrole
+@stop
+
 @section('title')
 Pagos a: {{$enterprise->razon_social}}
 @stop

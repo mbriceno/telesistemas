@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Enterprise;
 use App\Plan;
 use App\Representative;
+use Log;
 
 class EnterpriseController extends Controller
 {
@@ -137,7 +138,14 @@ class EnterpriseController extends Controller
      */
     public function destroy($id)
     {
-        Enterprise::destroy($id);
+		$enterprise = Enterprise::find($id);
+		$users = $enterprise->staff;
+		
+		foreach($users as $staff){
+			$staff->delete();
+		}
+		$enterprise->delete();
+        //Enterprise::destroy($id);
 
         return redirect()->route('admin.empresa.index')->with('message', '<div class="alert alert-success" style="margin-top:15px">Empresa eliminada con Éxito</div>');
     }

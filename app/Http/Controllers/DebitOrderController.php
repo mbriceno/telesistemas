@@ -23,6 +23,13 @@ class DebitOrderController extends Controller
         'CND' => 'Cancelado',
         'CRD' => 'Creada'
     );
+
+    public function __construct()
+    {
+        $this->middleware('level:20', ['only' => ['debit_list', 'show']]);
+        $this->middleware('level:90', ['except' => ['debit_list', 'show']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
