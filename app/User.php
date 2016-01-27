@@ -19,7 +19,7 @@ class User extends Model implements AuthenticatableContract,
                                     HasRoleAndPermissionContract
 {
     use Authenticatable, CanResetPassword, HasRoleAndPermission, SoftDeletes;
-	
+
 	protected $dates = ['deleted_at'];
     /**
      * The database table used by the model.
