@@ -12,7 +12,8 @@
         "artisaninweb/laravel-soap": "0.2.*",
         "maatwebsite/excel": "~2.0.0",
         "barryvdh/laravel-dompdf": "0.6.*",
-        "owen-it/laravel-auditing": "^2.1"
+        "owen-it/laravel-auditing": "^2.1",
+        "intervention/image": "^2.3"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

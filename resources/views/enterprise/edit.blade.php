@@ -26,7 +26,7 @@ Empresas
             </div>
             <!-- /.col-lg-12 -->
             <div class="col-xs-12 col-sm-9 col-lg-9">
-                {!! Form::model($empresa, array('route' => array('admin.empresa.update', $empresa->id), 'method' => 'PUT','id'=>'formid')) !!}
+                {!! Form::model($empresa, array('route' => array('admin.empresa.update', $empresa->id), 'method' => 'PUT','id'=>'formid',"files"=>true)) !!}
                 <div class="row">
                     <div class="form-group col-xs-12 col-sm-12 col-lg-6">
                         {!! Form::label("*Razón social:") !!}
@@ -97,6 +97,13 @@ Empresas
                         {!! Form::select('plan_id', $planes, null, array('class' => 'form-control')) !!}
                         @if($errors->has('plan_id'))
                         <div class="error">{{ $errors->first('plan_id') }}</div>
+                        @endif
+                    </div>
+                    <div class="form-group col-xs-12 col-sm-12 col-lg-6">
+                        {!! Form::label("*Logo:") !!}
+                        {!! Form::file('logo', array('class' => 'form-control')) !!}
+                        @if($errors->has('logo'))
+                            <div class="error">{{ $errors->first('logo') }}</div>
                         @endif
                     </div>
                 </div>
