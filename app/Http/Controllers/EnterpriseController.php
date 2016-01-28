@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+//use Faker\Provider\Image;
+use Intervention\Image\ImageManagerStatic as Image;
 
+
+use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Enterprise;
@@ -53,6 +56,18 @@ class EnterpriseController extends Controller
         $this->validate($request, Representative::$rules_ct);
 
         $empresa = Enterprise::create($request->all());
+
+        $request->hasFile('logo');
+        $img = Image::make($request->file('logo'))->resize(200, 200);
+        $tipoImagen = $request->file('logo')->getClientOriginalExtension();
+        $fileName = $empresa->getAttributeValue('id');
+        $urlPath = 'assets/empresas/'.$fileName.'.'.$tipoImagen;
+        $img->save($urlPath);
+
+        $empresa->logo = $urlPath;
+        $empresa->save();
+
+
         $rep_legal = new Representative;
         $rep_legal->tipo = 'legal';
         $rep_legal->nombre = $request->input('nombre_rl');

@@ -72,6 +72,9 @@
             <li>
                 <a href="{{ URL::route('sale-point.orden-venta.create') }}"><i class="fa fa-shopping-cart fa-fw"></i> Nueva Venta</a>
             </li>
+            <li>
+                <a href="#"><img src="{{Auth::user()->enterprise[0]->logo}}" alt=""></a>
+            </li>
             @endrole
         </ul>
     </div>

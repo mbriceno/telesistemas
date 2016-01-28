@@ -22,7 +22,8 @@ class Enterprise extends Model
         'email' => 'required|email',
         'web' => 'required|url',
         'status' => 'required',
-        'plan_id' => 'required|integer'
+        'plan_id' => 'required|integer',
+        'logo' => 'required|image|mimes:jpeg,gif,png'
     );
 
     protected $fillable = array('razon_social', 'nombre_comercial', 
