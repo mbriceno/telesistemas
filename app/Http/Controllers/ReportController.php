@@ -309,6 +309,68 @@ class ReportController extends Controller
         })->download('xls');
     }
 
+    public function ventas_empresa(Request $request, $id){
+        $empresas = Enterprise::orderBy('razon_social')->withTrashed()->where('id', $id)->get();
+        $ordenes = new SaleOrder;
+        $order = $request->input('order') == 'asc' ? 'ASC':'DESC';
+        $filtros = array();
+
+        if($request->input('sort') == 'razon_social'){
+            $ordenes = $ordenes->orderBy('razon_social',$order);
+        }
+        elseif ($request->input('sort') == 'created_at') {
+            $ordenes = $ordenes->orderBy('created_at',$order);
+        }
+        elseif ($request->input('sort') == 'nro_orden') {
+            $ordenes = $ordenes->orderBy('nro_orden',$order);
+        }
+        elseif ($request->input('sort') == 'total') {
+            $ordenes = $ordenes->orderBy('total',$order);
+        }
+
+        $empresa = null;
+        if($request->user()->enterprise[0]->id == $id){
+            $ordenes = $ordenes->where('enterprise_id', $id);
+            $empresa = Enterprise::withTrashed()->find($id);
+            $filtros['empresa_id'] = $id;
+
+            if($request->input('fecha_inic') != '' && $request->input('fecha_fin') != ''){
+                $inic_arr = explode('/', $request->input('fecha_inic'));
+                $inic = $inic_arr[2]."-".$inic_arr[1]."-".$inic_arr[0]." 00:00:00";
+                $fin_arr = explode('/', $request->input('fecha_fin'));
+                $fin = $fin_arr[2]."-".$fin_arr[1]."-".$fin_arr[0]." 11:59:59";
+                $ordenes = $ordenes->whereBetween('created_at', [$inic, $fin]);
+                $filtros['fecha_inic'] = $request->input('fecha_inic');
+                $filtros['fecha_fin'] = $request->input('fecha_fin');
+            }elseif($request->input('fecha_inic') != '' && $request->input('fecha_fin') == ''){
+                $inic_arr = explode('/', $request->input('fecha_inic'));
+                $inic = $inic_arr[2]."-".$inic_arr[1]."-".$inic_arr[0]." 00:00:00";
+                $ordenes = $ordenes->where('created_at', '>', $inic);
+                $filtros['fecha_fin'] = $request->input('fecha_fin');
+            }elseif($request->input('fecha_inic') == '' && $request->input('fecha_fin') != ''){
+                $fin_arr = explode('/', $request->input('fecha_fin'));
+                $fin = $fin_arr[2]."-".$fin_arr[1]."-".$fin_arr[0]." 11:59:59";
+                $ordenes = $ordenes->where('created_at', '<', $fin);
+                $filtros['fecha_inic'] = $request->input('fecha_inic');
+            }
+
+            $ordenes = $ordenes->paginate(10);
+            $order_colunm = $order=='ASC' ? 'desc':'asc';
+            $param_nombre = array_merge(['sort'=>'razon_social','order'=>$order_colunm], $filtros);
+            $param_date = array_merge(['sort'=>'created_at','order'=>$order_colunm], $filtros);
+            $param_orden = array_merge(['sort'=>'nro_orden','order'=>$order_colunm], $filtros);
+            $param_total = array_merge(['sort'=>'total','order'=>$order_colunm], $filtros);
+        }else{
+            return redirect()->route('sale-point')->with('message', '<div class="alert alert-danger" style="margin-top:15px">Acceso no permitido</div>');
+        }
+
+        return view('report.ventas', compact('ordenes','order_colunm',
+                                            'empresas','filtros',
+                                            'param_nombre','param_date',
+                                            'param_orden','param_total',
+                                            'monto_plan','empresa'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

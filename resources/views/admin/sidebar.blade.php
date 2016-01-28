@@ -68,6 +68,16 @@
                 </ul>
             </li>
             @endrole
+            @role('empresas.administrador')
+            <li>
+                <a href="#"><i class="fa fa-flag-checkered fa-fw"></i> Reportes</a>
+                <ul class="nav" id="side-menu">
+                    <li>
+                        <a href="{{ URL::route('sale-point.reportes.ventas.empresas', Auth::user()->enterprise[0]->id) }}"><i class="fa fa-file-text fa-fw"></i> Ventas</a>
+                    </li>
+                </ul>
+            </li>
+            @endrole
             @role('empresas.vendedor|empresas.administrador')
             <li>
                 <a href="{{ URL::route('sale-point.orden-venta.create') }}"><i class="fa fa-shopping-cart fa-fw"></i> Nueva Venta</a>

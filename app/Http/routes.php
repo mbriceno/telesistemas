@@ -77,4 +77,5 @@ Route::group(array('prefix' => 'sale-point', 'middleware' => ['auth','role:empre
 	Route::get('orden-venta/pago-paso1', array('as'=>'sale-point.orden-venta.pago-paso1',
 									'uses' => 'SaleOrderController@payment_step1'));
 	Route::resource('orden-venta', 'SaleOrderController');
+	Route::get('reportes/empresa/ventas/{id}', array('as'=>'sale-point.reportes.ventas.empresas','uses' => 'ReportController@ventas_empresa'));
 });
