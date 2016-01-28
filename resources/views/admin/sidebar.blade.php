@@ -85,7 +85,7 @@
             @endrole
             @role('empresas.vendedor|empresas.administrador')
             <li>
-                {!! HTML::image(Auth::user()->enterprise[0]->logo,'Logo Empresa', array('width' => '110', 'style'=>'margin-top:190px;margin-left:18px;')) !!}
+                {!! HTML::image(Auth::user()->enterprise[0]->logo,'Logo Empresa', array('width' => '110', 'style'=>'margin-top:190px;margin-left:-130px;position:fixed;')) !!}
             </li>
             @endrole
         </ul>
