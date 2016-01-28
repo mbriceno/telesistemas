@@ -3,10 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Rubro extends Model
 {
-    //
+    use SoftDeletes;
+
     use \OwenIt\Auditing\AuditingTrait;
     // Fields you do NOT want to register.
     protected $dontKeepLogOf = ['created_at', 'updated_at'];

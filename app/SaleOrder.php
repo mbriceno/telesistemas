@@ -3,9 +3,18 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class SaleOrder extends Model
 {
+    use SoftDeletes;
+
+    use \OwenIt\Auditing\AuditingTrait;
+    // Fields you do NOT want to register.
+    protected $dontKeepLogOf = ['created_at', 'updated_at'];
+    // Tell what actions you want to audit.
+    protected $auditableTypes = ['created', 'saved', 'deleted'];
+    
 	protected $table = 'sale_orders';
 
     public static $rules = array(
@@ -27,6 +36,6 @@ class SaleOrder extends Model
 
     public function enterprise()
     {
-        return $this->belongsTo('App\Enterprise');
+        return $this->belongsTo('App\Enterprise')->withTrashed();
     }
 }

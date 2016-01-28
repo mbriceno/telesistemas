@@ -3,9 +3,18 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class PaymentTransaction extends Model
 {
+    use SoftDeletes;
+
+    use \OwenIt\Auditing\AuditingTrait;
+    // Fields you do NOT want to register.
+    protected $dontKeepLogOf = ['created_at', 'updated_at'];
+    // Tell what actions you want to audit.
+    protected $auditableTypes = ['created', 'saved', 'deleted'];
+    
 	public static $rules = array(
         'payment_order_id' => 'required',
         'tipo_pago' => 'required',

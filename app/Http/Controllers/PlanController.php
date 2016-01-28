@@ -123,7 +123,7 @@ class PlanController extends Controller
     {
 		$plan = Plan::find($id);
 		if(count($plan->enterprises)>0){
-			return redirect()->route('admin.plan.index')->with('message', '<div class="alert alert-warning" style="margin-top:15px">Este plan contiene empresas asociadas por ende no puede ser eliminado</div>');
+			return redirect()->route('admin.plan.index')->with('message', '<div class="alert alert-warning" style="margin-top:15px">Este plan está asociado a algunas empresas por ende no puede ser eliminado</div>');
 		}else{
         	$plan->delete();
 		}

@@ -8,6 +8,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Enterprise extends Model
 {
 	use SoftDeletes;
+
+    use \OwenIt\Auditing\AuditingTrait;
+    // Fields you do NOT want to register.
+    protected $dontKeepLogOf = ['created_at', 'updated_at'];
+    // Tell what actions you want to audit.
+    protected $auditableTypes = ['created', 'saved', 'deleted'];
 	
 	protected $dates = ['deleted_at'];
 

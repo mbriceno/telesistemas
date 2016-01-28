@@ -35,7 +35,7 @@ Ventas
                                 <select name="empresa_id" class="form-control">
 									<option value="">Empresas</option>
                                 @foreach($empresas as $emp )
-                                    <option value="{{$emp->id}}" @if(isset($filtros['empresa_id']) && $filtros['empresa_id']==$emp->id)selected="selected"@endif>{{$emp->razon_social}}</option>
+                                    <option value="{{$emp->id}}" @if(isset($filtros['empresa_id']) && $filtros['empresa_id']==$emp->id)selected="selected"@endif>{{$emp->razon_social}} @if($emp->trashed())(Eliminada)@endif</option>
                                 @endforeach
                                 </select>
                             </div>

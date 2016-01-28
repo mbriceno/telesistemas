@@ -113,9 +113,14 @@ class RubroController extends Controller
     public function destroy($id)
     {
         try{
-            Rubro::destroy($id);
+            $rubro = Rubro::find($id);
+            if(count($rubro->planes)>0){
+                return redirect()->route('admin.rubro.index')->with('message', '<div class="alert alert-warning" style="margin-top:15px">Este rubro está asociado a algunos planes por ende no puede ser eliminado</div>');
+            }else{
+                $rubro->delete();
+            }
         }catch (Exception $e) {
-            
+
         }
 
         return redirect()->route('admin.rubro.index')->with('message', '<div class="alert alert-success" style="margin-top:15px">Rubro eliminado con Éxito</div>');

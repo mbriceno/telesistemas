@@ -119,7 +119,7 @@ class ReportController extends Controller
     }
 
     public function ventas(Request $request){
-        $empresas = Enterprise::orderBy('razon_social')->get();
+        $empresas = Enterprise::orderBy('razon_social')->withTrashed()->get();
         $ordenes = new SaleOrder;
         $order = $request->input('order') == 'asc' ? 'ASC':'DESC';
         $filtros = array();
@@ -140,7 +140,7 @@ class ReportController extends Controller
         $empresa = null;
         if($request->input('empresa_id')){
             $ordenes = $ordenes->where('enterprise_id', $request->input('empresa_id'));
-            $empresa = Enterprise::find($request->input('empresa_id'));
+            $empresa = Enterprise::withTrashed()->find($request->input('empresa_id'));
             $filtros['empresa_id'] = $request->input('empresa_id');
         }
 
