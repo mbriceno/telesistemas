@@ -15,7 +15,7 @@ Empresas
             </div>
             <!-- /.col-lg-12 -->
             <div class="col-xs-12 col-sm-9 col-lg-9">
-                {!! Form::open(array("method" => "POST","route" => "admin.empresa.store","role" => "form","id"=>"formid")) !!}
+                {!! Form::open(array("method" => "POST","route" => "admin.empresa.store","role" => "form","id"=>"formid","files"=>true)) !!}
                 <div class="row">
                     <div class="form-group col-xs-12 col-sm-12 col-lg-6">
                         {!! Form::label("*Razón social:") !!}
@@ -78,6 +78,13 @@ Empresas
                         {!! Form::select('status',array( '1' => 'Activo', '0' => 'Inactivo'), null, array('class' => 'form-control')) !!}
                         @if($errors->has('status'))
                         <div class="error">{{ $errors->first('status') }}</div>
+                        @endif
+                    </div>
+                    <div class="form-group col-xs-12 col-sm-12 col-lg-6">
+                        {!! Form::label("*Logo:") !!}
+                        {!! Form::file('logo', array('class' => 'form-control')) !!}
+                        @if($errors->has('logo'))
+                            <div class="error">{{ $errors->first('logo') }}</div>
                         @endif
                     </div>
                 </div>
