@@ -58,10 +58,22 @@ Planes y Servicios
                             <div class="form-group col-xs-12 col-sm-12 col-lg-6">
                                 <input type="submit" value="Aplicar filtros" class="btn btn-primary">
 								<a href="{{ URL::route('admin.reportes.planes') }}" class="btn btn-danger">Limpiar filtros</a>
+
                             </div>
+                            </form>
+                            {!! Form::open(array('method' => 'get',"route" => "admin.reportes.planes.excel")) !!}
+                            <div class="form-group col-xs-12 col-sm-12 col-lg-6 pull-right" style="text-align:right">
+                                <input type="hidden" name="sort" value="{{ Request::input('sort')}}">
+                                <input type="hidden" name="order" value="{{ Request::input('order')}}">
+                                <input type="hidden" name="tipo_plan" value="@if(isset($filtros['tipo_plan'])){{$filtros['tipo_plan']}}@endif">
+                                <input type="hidden" name="fecha_inic" value="@if(isset($filtros['fecha_inic'])){{$filtros['fecha_inic']}}@endif" />
+                                <input type="hidden" name="fecha_fin" value="@if(isset($filtros['fecha_fin'])){{$filtros['fecha_fin']}}@endif" />
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-cloud-download"></i> Exportar a Excel</button>
+                            </div>
+                            </form>
                         </div>
                         
-                        </form>
+
                     </div>
                     <div class="dataTable_wrapper table-responsive">
                         @if(isset($filtros['tipo_plan']))
