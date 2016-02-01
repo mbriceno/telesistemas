@@ -270,7 +270,7 @@ class ReportController extends Controller
                 }else{
                     $inic_table_row++;
                     $sheet->row(2, array(
-                        'Plan', 'No selecciono ningun plan'
+                        'Plan', 'Todos los planes'
                     ));
                 }
 
