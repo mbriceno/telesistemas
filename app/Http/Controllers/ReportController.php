@@ -177,6 +177,156 @@ class ReportController extends Controller
                                             'param_orden','param_total',
                                             'monto_plan','empresa'));
     }
+    public function planes_a_excel(Request $request){
+        $planObj = Plan::orderBy('nombre')->get();
+
+        $enterprises = new Enterprise;
+
+        $order = $request->input('order') == 'asc' ? 'ASC':'DESC';
+
+        $enterprises = Enterprise::select('enterprises.*','planes.created_at AS created_date',
+            'planes.id AS plan_id',
+            \DB::raw('(select SUM(so.total) from sale_orders as so where so.enterprise_id = enterprises.id) AS total_sales'))
+            ->leftJoin('planes', 'planes.id', '=', 'enterprises.plan_id')
+            ->orderBy('total_sales', $order);
+
+
+
+        if($request->input('sort') == 'razon_social'){
+            $enterprises = Enterprise::orderBy('razon_social',$order);
+        }
+        elseif ($request->input('sort') == 'created_at') {
+            $enterprises = Enterprise::orderBy('created_at',$order);
+        }
+        elseif ($request->input('sort') == 'plan') {
+            $enterprises = Enterprise::select('enterprises.*','planes.created_at AS created_date','planes.id AS plan_id')
+                ->leftJoin('planes', 'planes.id', '=', 'enterprises.plan_id')
+                ->orderBy('planes.nombre', $order);
+        }
+        elseif ($request->input('sort') == 'totals') {
+            $enterprises = Enterprise::select('enterprises.*','planes.created_at AS created_date',
+                'planes.id AS plan_id',
+                \DB::raw('(select SUM(so.total) from sale_orders as so where so.enterprise_id = enterprises.id) AS total_sales'))
+                ->leftJoin('planes', 'planes.id', '=', 'enterprises.plan_id')
+                ->orderBy('total_sales', $order);
+        }
+
+        //Filters
+        $filtros = array();
+        $monto_plan = $planObj = null;
+        if($request->input('tipo_plan')){
+            $enterprises = $enterprises->where('plan_id', $request->input('tipo_plan'));
+            $filtros['tipo_plan'] = $request->input('tipo_plan');
+            $planObj = Plan::find($request->input('tipo_plan'));
+            $monto_plan = Enterprise::select(\DB::raw('SUM(payment_orders.monto) AS total_sales'))
+                ->where('plan_id', $request->input('tipo_plan'))
+                ->leftJoin('payment_orders', 'payment_orders.enterprise_id', '=', 'enterprises.id')
+                ->first();
+        }else{
+            $planObj = Plan::find(2);
+        }
+
+        if($request->input('fecha_inic') != '' && $request->input('fecha_fin') != ''){
+            $inic_arr = explode('/', $request->input('fecha_inic'));
+            $inic = $inic_arr[2]."-".$inic_arr[1]."-".$inic_arr[0]." 00:00:00";
+            $fin_arr = explode('/', $request->input('fecha_fin'));
+            $fin = $fin_arr[2]."-".$fin_arr[1]."-".$fin_arr[0]." 11:59:59";
+            $enterprises = $enterprises->whereBetween('created_at', [$inic, $fin]);
+            $filtros['fecha_inic'] = $request->input('fecha_inic');
+            $filtros['fecha_fin'] = $request->input('fecha_fin');
+        }elseif($request->input('fecha_inic') != '' && $request->input('fecha_fin') == ''){
+            $inic_arr = explode('/', $request->input('fecha_inic'));
+            $inic = $inic_arr[2]."-".$inic_arr[1]."-".$inic_arr[0]." 00:00:00";
+            $enterprises = $enterprises->where('created_at', '>', $inic);
+            $filtros['fecha_fin'] = $request->input('fecha_fin');
+        }elseif($request->input('fecha_inic') == '' && $request->input('fecha_fin') != ''){
+            $fin_arr = explode('/', $request->input('fecha_fin'));
+            $fin = $fin_arr[2]."-".$fin_arr[1]."-".$fin_arr[0]." 11:59:59";
+            $enterprises = $enterprises->where('created_at', '<', $fin);
+            $filtros['fecha_inic'] = $request->input('fecha_inic');
+        }
+
+        $enterprises = $enterprises->get();
+
+        \Excel::create('report', function($excel) use ($planObj, $enterprises, $filtros) {
+            $excel->sheet('hoja_'.date('d-m-Y'), function($sheet) use ($planObj, $enterprises, $filtros) {
+                $inic_table_row = 3;
+                $sheet->mergeCells('A1:B1');
+
+                $sheet->row(1, array(
+                    'Reporte de Planes'
+                ));
+//
+//                $sheet->row(2, array(
+//                    'Plan',$planes->nombre
+//                ));
+
+                if($planObj != null){
+                    $inic_table_row++;
+                    $sheet->row(2, array(
+                        'Plan', $planObj->nombre
+                    ));
+                }
+
+                $fechas = array();
+                if(isset($filtros['fecha_inic'])){
+                    $inic_table_row++;
+                    $inic_table_row++;
+                    $fechas[] = 'Fecha Inicial';
+                    $fechas[] = $filtros['fecha_inic'];
+                }
+
+                if(isset($filtros['fecha_inic'])){
+                    $fechas[] = 'Fecha Final';
+                    $fechas[] = $filtros['fecha_fin'];
+                }
+
+                if(!empty($fechas)){
+                    $sheet->row(3, $fechas);
+                }
+
+                $sheet->row($inic_table_row, array(
+                    'Empresa',
+                    'Activa desde',
+                    'Plan',
+                    'Ingreso Total'
+                ));
+
+                $sheet->row($inic_table_row, function($row){
+                    $row->setBackground('#337ab7');
+                });
+
+                $sheet->setHeight($inic_table_row, 20);
+
+                $sheet->cells('A'.$inic_table_row.':G'.$inic_table_row, function($cells) {
+                    $cells->setFontSize(12);
+                    $cells->setValignment('top');
+                });
+
+                $sheet->setBorder('A'.$inic_table_row.':G'.$inic_table_row, 'thin');
+//                $acum = 0;
+                foreach ($enterprises as $key => $auxEmpresa) {
+//                    $acum+=$orden->total;
+                    $sheet->row($key+1+$inic_table_row, array(
+                        $auxEmpresa->razon_social,
+                        date("d/m/Y A", strtotime($auxEmpresa->created_at)),
+                        date("d/m/Y h:i:s A", strtotime($auxEmpresa->created_at)),
+                        $auxEmpresa->total_sales));
+
+                    $sheet->cells('E'.($key+1+$inic_table_row).':G'.($key+1+$inic_table_row), function($cells) {
+                        $cells->setAlignment('right');
+                    });
+                }
+
+//                $sheet->row($key+4+$inic_table_row, array(
+//                    'Ventas Totales', number_format($acum, 2, ',', '.')
+//                ));
+//                $sheet->cells('B'.($key+4+$inic_table_row), function($cells) {
+//                    $cells->setAlignment('right');
+//                });
+            });
+        })->download('xls');
+    }
 
     public function ventas_a_excel(Request $request){
         $empresas = Enterprise::orderBy('razon_social')->get();

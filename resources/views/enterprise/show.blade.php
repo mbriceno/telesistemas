@@ -40,6 +40,8 @@ Empresa: {{$empresa->razon_social}}
                         <dd class="col-lg-6 col-md-6 col-xs-12 col-sm-6">{{$empresa->email}}</dd>
                         <dt class="col-lg-6 col-md-6 col-xs-12 col-sm-6">Web:</dt>
                         <dd class="col-lg-6 col-md-6 col-xs-12 col-sm-6">{{$empresa->web}}</dd>
+                        <dt class="col-lg-6 col-md-6 col-xs-12 col-sm-6">Logo:</dt>
+                        <dd class="col-lg-6 col-md-6 col-xs-12 col-sm-6">{!! HTML::image($empresa->logo) !!}</dd>
                     </dl>
                 </div>
                 <div class="row box-info-show">
