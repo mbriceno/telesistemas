@@ -178,6 +178,7 @@ class ReportController extends Controller
                                             'monto_plan','empresa'));
     }
     public function planes_a_excel(Request $request){
+
         $planObj = Plan::orderBy('nombre')->get();
 
         $enterprises = new Enterprise;
@@ -223,7 +224,7 @@ class ReportController extends Controller
                 ->leftJoin('payment_orders', 'payment_orders.enterprise_id', '=', 'enterprises.id')
                 ->first();
         }else{
-            $planObj = Plan::find(2);
+            //$planObj = Plan::find(2);
         }
 
         if($request->input('fecha_inic') != '' && $request->input('fecha_fin') != ''){
@@ -265,6 +266,11 @@ class ReportController extends Controller
                     $inic_table_row++;
                     $sheet->row(2, array(
                         'Plan', $planObj->nombre
+                    ));
+                }else{
+                    $inic_table_row++;
+                    $sheet->row(2, array(
+                        'Plan', 'No selecciono ningun plan'
                     ));
                 }
 
