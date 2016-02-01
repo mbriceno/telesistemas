@@ -26,6 +26,13 @@ class User extends Model implements AuthenticatableContract,
     // Tell what actions you want to audit.
     protected $auditableTypes = ['created', 'saved', 'deleted'];
 
+    public static $logCustomMessage = '{user.name|Anonymous} {type} Usuario <span class="time">{elapsed_time}</span>';
+
+    public static $logCustomFields = [
+        'name'  => 'Usuario definido como: {new.name}',
+        'email'  => 'Correo definido como: {new.email}',
+    ];
+
 	protected $dates = ['deleted_at'];
     /**
      * The database table used by the model.

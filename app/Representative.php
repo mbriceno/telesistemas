@@ -14,6 +14,19 @@ class Representative extends Model
     protected $dontKeepLogOf = ['created_at', 'updated_at'];
     // Tell what actions you want to audit.
     protected $auditableTypes = ['created', 'saved', 'deleted'];
+
+    public static $logCustomMessage = '{user.name|Anonymous} {type} Representante <span class="time">{elapsed_time}</span>';
+
+    public static $logCustomFields = [
+        'nombre'  => 'Nombre definido como: {new.nombre}',
+        'apellido'  => 'Apellido definido como: {new.apellido}',
+        'direccion'  => 'Dirección definido como: {new.direccion}',
+        'ci'  => 'CI definido como: {new.ci}',
+        'rif'  => 'RIF definido como: {new.rif}',
+        'telefono'  => 'Teléfono definido como: {new.telefono}',
+        'email'  => 'Correo definido como: {new.email}',
+        'tipo'  => 'Celular definido como: {new.tipo}',
+    ];
     
     protected $table = 'representatives';
 

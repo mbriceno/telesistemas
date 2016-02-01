@@ -14,6 +14,19 @@ class Profile extends Model
     protected $dontKeepLogOf = ['created_at', 'updated_at'];
     // Tell what actions you want to audit.
     protected $auditableTypes = ['created', 'saved', 'deleted'];
+
+    public static $logCustomMessage = '{user.name|Anonymous} {type} Profile <span class="time">{elapsed_time}</span>';
+
+    public static $logCustomFields = [
+        'nombre'  => 'Nombre definido como: {new.nombre}',
+        'apellido'  => 'Apellido definido como: {new.apellido}',
+        'direccion'  => 'Dirección definido como: {new.direccion}',
+        'ci'  => 'CI definido como: {new.ci}',
+        'telefono'  => 'Teléfono definido como: {new.telefono}',
+        'celular'  => 'Celular definido como: {new.celular}',
+        'email'  => 'Correo definido como: {new.email}',
+        'sexo'  => 'Sexo definido como: {new.sexo}',
+    ];
     
     public static $rules = array(
         'nombre' => 'required|max:100|min:3',

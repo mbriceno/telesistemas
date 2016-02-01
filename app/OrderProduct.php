@@ -10,6 +10,7 @@ class OrderProduct extends Model
     use SoftDeletes;
 
 	use \OwenIt\Auditing\AuditingTrait;
+    protected $auditEnabled  = false;
 	// Fields you do NOT want to register.
     protected $dontKeepLogOf = ['created_at', 'updated_at'];
     // Tell what actions you want to audit.

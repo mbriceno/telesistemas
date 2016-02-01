@@ -14,6 +14,21 @@ class Enterprise extends Model
     protected $dontKeepLogOf = ['created_at', 'updated_at'];
     // Tell what actions you want to audit.
     protected $auditableTypes = ['created', 'saved', 'deleted'];
+
+    public static $logCustomMessage = '{user.name|Anonymous} {type} Empresa <span class="time">{elapsed_time}</span>';
+
+    public static $logCustomFields = [
+        'razon_social'  => 'Razón Social definido como: {new.razon_social}',
+        'nombre_comercial'  => 'Nombre comercial definido como: {new.nombre_comercial}',
+        'direccion'  => 'Dirección definido como: {new.direccion}',
+        'rif'  => 'Rif definido como: {new.rif}',
+        'telefono'  => 'Teléfono definido como: {new.telefono}',
+        'email'  => 'Email definido como: {new.email}',
+        'web'  => 'Web definido como: {new.web}',
+        'status'  => 'Estatus definido como: {new.status}',
+        'plan_id'  => 'Plan definido como: {new.plan_id}',
+        'logo'  => 'Logo definido como: {new.logo}',
+    ];
 	
 	protected $dates = ['deleted_at'];
 

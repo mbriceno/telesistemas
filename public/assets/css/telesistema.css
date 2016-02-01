@@ -119,3 +119,9 @@ div#wrapper {
   float: none;
   margin-bottom: 5px;
 }
+.log-accordion h5.panel-title {
+  font-size: 14px;
+}
+.log-accordion a span.time {
+  float: right;
+}

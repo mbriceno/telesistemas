@@ -14,6 +14,17 @@ class BankAccount extends Model
     protected $dontKeepLogOf = ['created_at', 'updated_at'];
     // Tell what actions you want to audit.
     protected $auditableTypes = ['created', 'saved', 'deleted'];
+
+    public static $logCustomMessage = '{user.name|Anonymous} {type} Cuenta Bancaria <span class="time">{elapsed_time}</span>';
+
+    public static $logCustomFields = [
+        'titular'  => 'Titular definido como: {new.titular}',
+        'nro_cuenta'  => 'Número de cuenta definido como: {new.nro_cuenta}',
+        'tipo'  => 'Tipo definido como: {new.tipo}',
+        'rif_ci'  => 'CI/RIF definido como: {new.rif_ci}',
+        'bank_id'  => 'Banco definido como: {new.bank_id}',
+        'enterprise_id'  => 'Empresa definido como: {new.enterprise_id}',
+    ];
     
     protected $table = 'bank_accounts';
 

@@ -70,6 +70,8 @@ Route::group(array('prefix' => 'admin', 'middleware' => ['auth']), function(){
 	Route::get('pagos-empresas/listado/{id}', array('as'=>'admin.pagos-empresas.listado','uses' => 'DebitOrderController@debit_list'));
 	Route::get('pagos-empresas/nuevo-debito/{id}', array('as'=>'admin.pagos-empresas.create_debit','uses' => 'DebitOrderController@create_debit'));
 	Route::resource('pagos-empresas', 'DebitOrderController');
+
+	Route::resource('auditorias', 'SystemAuditController');
 });
 
 Route::group(array('prefix' => 'sale-point', 'middleware' => ['auth','role:empresas.vendedor|empresas.administrador']), function(){

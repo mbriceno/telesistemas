@@ -15,6 +15,16 @@ class PaymentTransaction extends Model
     // Tell what actions you want to audit.
     protected $auditableTypes = ['created', 'saved', 'deleted'];
     
+    public static $logCustomMessage = '{user.name|Anonymous} {type} Transacción de pago <span class="time">{elapsed_time}</span>';
+
+    public static $logCustomFields = [
+        'tipo_pago'  => 'Tipo de pago definido como: {new.tipo_pago}',
+        'fecha_transaccion'  => 'Fecha definido como: {new.fecha_transaccion}',
+        'nro_referencia'  => 'Referencia definido como: {new.nro_referencia}',
+        'monto'  => 'Monto definido como: {new.monto}',
+        'payment_order_id'  => 'Orden de Pago definido como: {new.payment_order_id}',
+    ];
+
 	public static $rules = array(
         'payment_order_id' => 'required',
         'tipo_pago' => 'required',
