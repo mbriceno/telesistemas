@@ -156,12 +156,12 @@ class ReportController extends Controller
             $inic_arr = explode('/', $request->input('fecha_inic'));
             $inic = $inic_arr[2]."-".$inic_arr[1]."-".$inic_arr[0]." 00:00:00";
             $ordenes = $ordenes->where('created_at', '>', $inic);
-            $filtros['fecha_fin'] = $request->input('fecha_fin');
+            $filtros['fecha_inic'] = $request->input('fecha_inic');
         }elseif($request->input('fecha_inic') == '' && $request->input('fecha_fin') != ''){
             $fin_arr = explode('/', $request->input('fecha_fin'));
             $fin = $fin_arr[2]."-".$fin_arr[1]."-".$fin_arr[0]." 11:59:59";
             $ordenes = $ordenes->where('created_at', '<', $fin);
-            $filtros['fecha_inic'] = $request->input('fecha_inic');
+            $filtros['fecha_fin'] = $request->input('fecha_fin');
         }
 
         $ordenes = $ordenes->paginate(10);
@@ -238,12 +238,12 @@ class ReportController extends Controller
             $inic_arr = explode('/', $request->input('fecha_inic'));
             $inic = $inic_arr[2]."-".$inic_arr[1]."-".$inic_arr[0]." 00:00:00";
             $enterprises = $enterprises->where('created_at', '>', $inic);
-            $filtros['fecha_fin'] = $request->input('fecha_fin');
+            $filtros['fecha_inic'] = $request->input('fecha_inic');
         }elseif($request->input('fecha_inic') == '' && $request->input('fecha_fin') != ''){
             $fin_arr = explode('/', $request->input('fecha_fin'));
             $fin = $fin_arr[2]."-".$fin_arr[1]."-".$fin_arr[0]." 11:59:59";
             $enterprises = $enterprises->where('created_at', '<', $fin);
-            $filtros['fecha_inic'] = $request->input('fecha_inic');
+            $filtros['fecha_fin'] = $request->input('fecha_fin');
         }
 
         $enterprises = $enterprises->get();
