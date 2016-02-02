@@ -88,7 +88,7 @@ Auditorias
 		</div>
 		<!-- /.col-lg-12 -->
 		<div class="col-xs-12 col-sm-12 col-lg-12">
-			{!! $logs->render() !!}
+			{!! $logs->appends($filtros)->render() !!}
 		</div>
 	</div>
 	<!-- /.row -->

@@ -54,6 +54,9 @@
                     <li>
                         <a href="{{ URL::route('admin.cuentas_bancarias.index') }}"><i class="fa fa-money fa-fw"></i> Cuetas Bancarias</a>
                     </li>
+                    <li>
+                        <a href="{{ URL::route('admin.auditorias.index') }}"><i class="fa fa-database fa-fw"></i> Auditorias</a>
+                    </li>
                 </ul>
             </li>
             <li>
