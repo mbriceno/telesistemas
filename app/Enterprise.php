@@ -41,7 +41,7 @@ class Enterprise extends Model
         'rif' => 'required',
         'telefono' => 'required|alpha_dash',
         'email' => 'required|email',
-        'web' => 'required|url',
+        'web' => 'url',
         'status' => 'required',
         'plan_id' => 'required|integer',
         'logo' => 'required|image|mimes:jpeg,gif,png'

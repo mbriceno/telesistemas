@@ -21,7 +21,7 @@ Nuevo pago: {{$payment->enterprise->razon_social}}
                 <div class="row">
                     <div class="form-group col-xs-6 col-sm-3 col-lg-6">
                         {!!Form::label("*Fecha de Pago:")!!}
-                        {!!Form::input('date', 'fecha_pago', Input::old('fecha_pago'), 
+                        {!!Form::text('fecha_pago', Input::old('fecha_pago'), 
                             array("class" => "form-control",
                                     'id'=>'fecha_pago', 
                                     "max" => date('Y-m-d'),
@@ -97,7 +97,9 @@ Nuevo pago: {{$payment->enterprise->razon_social}}
 </div>
 <!-- /#page-wrapper -->
 <script type="text/javascript">
-
+$('#fecha_pago').datetimepicker({
+    format: 'YYYY-MM-DD'
+});
 </script>
 
 @stop

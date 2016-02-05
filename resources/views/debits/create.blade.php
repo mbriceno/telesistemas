@@ -2,7 +2,7 @@
 
 
 @section('title')
-Nueva orden de débito: {{$enterprise->razon_social}}
+Nueva orden de reembolso: {{$enterprise->razon_social}}
 @stop
 
 @section('content')
@@ -12,7 +12,7 @@ Nueva orden de débito: {{$enterprise->razon_social}}
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-lg-12">
-				<h1 class="page-header">Registrar débito: {{$enterprise->razon_social}}</h1>
+				<h1 class="page-header">Registrar reembolso: {{$enterprise->razon_social}}</h1>
 			</div>
 			<!-- /.col-lg-12 -->
 			<div class="col-xs-12 col-sm-9 col-lg-9">
@@ -69,7 +69,7 @@ Nueva orden de débito: {{$enterprise->razon_social}}
 
 					<div class="form-group col-xs-6 col-sm-3 col-lg-6">
 						{!!Form::label("*Fecha de déposito:")!!}
-						{!!Form::input('date', 'fecha_debito', Input::old('fecha_debito'), 
+						{!!Form::text('fecha_debito', Input::old('fecha_debito'), 
 							array("class" => "form-control",
 									'id'=>'fecha_debito', 
 									"max" => date('Y-m-d'),
@@ -89,7 +89,7 @@ Nueva orden de débito: {{$enterprise->razon_social}}
 				</div>
 				<div class="row">
 					<div class="form-group col-xs-12 col-sm-6 col-lg-6">
-						{!!Form::submit("Registrar Pago", array("class" => "btn btn-lg btn-success btn-block", "id" =>"btnSubmit"))!!}
+						{!!Form::submit("Registrar", array("class" => "btn btn-lg btn-success btn-block", "id" =>"btnSubmit"))!!}
 					</div>
 					<div class="form-group col-xs-12 col-sm-6 col-lg-6">
 						<a href="{!!URL::route('admin.pagos-empresas.listado', $enterprise->id)!!}" class="btn btn-lg btn-danger btn-block">Volver</a>
@@ -108,7 +108,11 @@ Nueva orden de débito: {{$enterprise->razon_social}}
 $.mask.definitions['~']='[VvJjEePp]';
 $('input[name="cirif_cuenta_bancaria"]').mask("~-9999999?999",{placeholder:" "});
 $(function () {
-  $('[data-toggle="tooltip"]').tooltip();
+	$('[data-toggle="tooltip"]').tooltip();
+  
+	$('#fecha_debito').datetimepicker({
+        format: 'YYYY-MM-DD'
+    });
 });
 </script>
 

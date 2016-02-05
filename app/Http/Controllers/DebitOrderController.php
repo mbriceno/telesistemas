@@ -135,7 +135,14 @@ class DebitOrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $debit = DebitOrder::find($id);
+        $data = $request->all();
+        $this->validate($request, DebitOrder::$rules);
+
+        $debit->update($data);
+        return redirect()
+                ->route('admin.pagos-empresas.listado', $request->input('enterprise_id'))
+                ->with('message', '<div class="alert alert-success" style="margin-top:15px">Actualización procesada con Éxito</div>');
     }
 
     /**

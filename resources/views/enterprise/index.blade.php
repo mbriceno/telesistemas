@@ -57,7 +57,7 @@ Empresas
                                                 <span class="fa fa-users" aria-hidden="true"></span>
                                             </a>
                                             <a href="{{ URL::route('admin.pagos.listado',$enterprise->id) }}" title="Ordenes de Pago" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span></a>
-                                            <a href="{{ URL::route('admin.pagos-empresas.listado',$enterprise->id) }}" title="Ordenes de débito" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-usd" aria-hidden="true"></span></a>
+                                            <a href="{{ URL::route('admin.pagos-empresas.listado',$enterprise->id) }}" title="Reembolsos" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-usd" aria-hidden="true"></span></a>
                                             <a href="{{ URL::route('admin.cuentas_bancarias.edit', $enterprise->id) }}" title="@if($enterprise->bank_account) Modificar cuenta bancaria @else Agregar datos Bancarios @endif" type="button" class="btn btn-primary">
                                                 <span class="fa fa-university" aria-hidden="true"></span>
                                             </a>

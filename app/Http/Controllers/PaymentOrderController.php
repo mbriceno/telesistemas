@@ -121,11 +121,18 @@ class PaymentOrderController extends Controller
                 //Monto entre la fecha de la ultima venta de la ultima orden de pago
                 //y la ultima venta del periodo a cobrar
                 $last_order = SaleOrder::where('enterprise_id', $enterprise->id)->orderBy('created_at','DESC')->first();
-                $amount = SaleOrder::where('enterprise_id', $enterprise->id)
-                                    ->whereBetween('created_at', array('0000-00-00 00:00:00',$last_order->created_at))
-                                    ->sum('total');
-                $to_pay = $amount * ($enterprise->plan->porcentaje / 100);
-                $period = sprintf('Desde inicio hasta %s', date("d/m/Y", strtotime($now)));
+                $amount = 0;
+                if($last_order){
+                    $amount = SaleOrder::where('enterprise_id', $enterprise->id)
+                                        ->whereBetween('created_at', array('0000-00-00 00:00:00',$last_order->created_at))
+                                        ->sum('total');
+                    $to_pay = $amount * ($enterprise->plan->porcentaje / 100);
+                    $period = sprintf('Desde inicio hasta %s', date("d/m/Y", strtotime($now)));
+                }else{
+                    return redirect()
+                        ->route('admin.pagos.listado', $id)
+                        ->with('message', '<div class="alert alert-warning" style="margin-top:15px">No hay pagos pendientes por facturar</div>');
+                }
             }
         }
 

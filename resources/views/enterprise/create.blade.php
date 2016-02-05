@@ -66,7 +66,7 @@ Empresas
                     </div>
 
                     <div class="form-group col-xs-12 col-sm-12 col-lg-6">
-                        {!! Form::label("*Web:") !!}
+                        <label>*Web: <i class="fa fa-info-circle fa-fw" data-toggle="tooltip" data-placement="right" title="Utilice el formato: http://www.example.com"></i></label>
                         {!!Form::text("web", Input::old('web'), array("class" => "form-control"))!!}
                         @if($errors->has('web'))
                         <div class="error">{{ $errors->first('web') }}</div>
@@ -240,6 +240,9 @@ Empresas
 $.mask.definitions['~']='[VvJjEePp]';
 $('input[name="rif"],input[name="ci_rl"],input[name="rif_rl"],input[name="ci_ct"],input[name="rif_ct"]').mask("~-9999999?999",{placeholder:" "});
 $('input[name="telefono"],input[name="telefono_rl"],input[name="telefono_ct"]').mask("9999-9999999",{placeholder:" "});
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip();
+});
 </script>
 
 @stop

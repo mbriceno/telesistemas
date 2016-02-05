@@ -42,6 +42,13 @@ class SaleOrderController extends Controller
     public function store(Request $request)
     {
 		$this->validate($request, SaleOrder::$rules);
+
+        if (!$request->has('products')) {
+            return redirect()
+                        ->route('sale-point.orden-venta.create')
+                        ->withInput();
+        }
+
         $serial = str_pad(SaleOrder::count(),6,'0',STR_PAD_LEFT);
 		$data = array_merge($request->all(), 
 									array(
@@ -50,7 +57,7 @@ class SaleOrderController extends Controller
 										'enterprise_id' => Auth::user()->enterprise[0]->id
 									));
 		$order = SaleOrder::create($data);
-	
+
 		foreach ($request->input('products') as $p) {
 			$producto = new OrderProduct;
 			$producto->nombre = $p['nombre'];

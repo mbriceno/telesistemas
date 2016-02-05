@@ -75,7 +75,28 @@ wrapper-ventas
 								</tr>
 							</thead>
 							<tbody>
-								
+								@if(Input::old('products'))
+								@foreach(Input::old('products') as $k => $prd)
+								<tr id="prd_">
+									<td>
+										{{$prd['nombre']}}
+										<input type="hidden" value="{{$prd['nombre']}}" name="products[{{$k}}][nombre]">
+									</td>
+									<td class="box-cantidad">
+								 		<input type="number" min="1" step="any" class="col-lg-6" name="products[{{$k}}][cantidad]" value="{{$prd['cantidad']}}" placeholder="Cantidad">
+									</td>
+									<td class="box-monto">
+								 		<span>{{$prd['monto']}}</span> Bs. <input type="hidden" value="{{$prd['monto']}}" name="products[{{$k}}][monto]">
+									</td>
+									<td class="box-monto-total">
+								 		<span>{{$prd['total']}}</span> Bs. <input type="hidden" value="{{$prd['total']}}" name="products[{{$k}}][total]">
+									</td>
+									<td class="">
+										<button type="button" class="btn btn-danger del-btn"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+									</td>
+								</tr>
+								@endforeach
+								@endif
 							</tbody>
 						</table>
 					</div>
@@ -162,7 +183,7 @@ $('input[name="telefono"]').mask("9999-9999999",{placeholder:" "});
 @stop
 
 @section('function')
-var count = 0;
+var count = <?php if(Input::old('products')){ echo count(Input::old('products')); }else{ echo 0; } ?>;
 $('.btn-add-product').click(function(e){
 	e.preventDefault();
 

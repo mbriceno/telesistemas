@@ -15,7 +15,7 @@ Pagos a: {{$enterprise->razon_social}}
 <div id="page-wrapper">
     <div class="row row-centered">
         <div class="col-xs-12 col-sm-12 col-lg-12">
-            <h1 class="page-header">Débitos: {{$enterprise->razon_social}}</h1>
+            <h1 class="page-header">Reembolsos: {{$enterprise->razon_social}}</h1>
         </div>
                 
         <div class="col-xs-12 col-sm-12 col-lg-12">
@@ -48,7 +48,7 @@ Pagos a: {{$enterprise->razon_social}}
                             <tbody>
                                 @foreach ($debits as $debit)
                                     <tr class="odd gradeX">
-                                        <td><a href="{{ URL::route('admin.pagos-empresas.show', $debit->id) }}">{{date('d/m/Y', strtotime($debit->fecha_debito))}}</a></td>
+                                        <td>{{date('d/m/Y', strtotime($debit->fecha_debito))}}</td>
                                         <td>{{$debit->periodo}}</td>
                                         <td>{{$debit->monto}} Bs.</td>
                                         <td>{{$status[$debit->status]}}</td>

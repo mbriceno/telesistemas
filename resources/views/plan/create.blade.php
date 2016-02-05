@@ -45,7 +45,7 @@ Planes y Servicios
 					<div class="form-group col-xs-12 col-sm-12 col-lg-6">
 						{!! Form::label("*Duración de la membresía:") !!}
 						<div>
-						{!! Form::input('number', 'tiempo_membresia', Input::old('tiempo_membresia'), array("class" => "form-control custom_width_number")) !!}
+						{!! Form::input('number', 'tiempo_membresia', Input::old('tiempo_membresia'), array("class"=>"form-control custom_width_number", "min"=>0)) !!}
 						{!! Form::select('unidad_tiempo', 
 										array('hours' => 'Hora(s)', 
 												'days' => 'Día(s)', 
